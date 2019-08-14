@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gra w kości</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <button class="start">Rozpocznij grę</button>
+    <div class="wrapper">
+        <!-- przycisk "rozpocznij grę" będzie jako jedyny na początku po wyjściu z okna zasad. Dopiero po jego kliknięciu pojawią się poszczególne informację, czyli tabela, runda, gracz, itd. Tak samo jak dopiero po kliknięciu w ten przycisk pojawią się okna dot. wyboru ilości zawodników. -->
+        <div class="informations">
+            <div class="game_rules">
+                <section class="up">
+                    <i class="far fa-times-circle on_off"></i>
+                    <p class="up_title">Zasady gry w kości</p>
+                </section>
+                <section class="down">
+                    <h1 class="title">Witaj w grze w kości!</h1>
+                    <p class="main_informations">
+                        Poniższa odmiana gry w kości jest projektem tworzonym w ramach nauki. Zasady różnią się w
+                        nieznacznym stopniu od "ogólnie przyjętych" zasad gry w kości. Panujące w grze zasady zostaną
+                        poniżej dokładnie opisane. Jeśli chcesz wyłączyć okno zasad, kliknij w krzyżyk w prawym rogu
+                        okna.
+                        <br>
+                        W każdym momencie można włączyć okno zasad, klikając w przycisk ze znakiem "?".
+                    </p>
+                    <p class="info_title">Czym jest gra w kości?</p>
+                    <p class="title_description">Gra w kości polega na rzucaniu kośćmy tak, aby uzyskać odpowiednią
+                        ilość oczek. Może się wydawać, iż gra polega w dużym stopniu na szczęściu, jednak jest to złudny
+                        trop. W grze liczą się również umiejętności kalkulacji oraz podejmowania odpowiednich wyborów.
+                    </p>
+                    <p class="info_title">Kolejki oraz gracze</p>
+                    <p class="title_description">
+                        W grze jest dostępnych 13 kolejek. W każdej z nich, każdy z graczy, których jest maksymalnie
+                        dwóch
+                        <span class="inside">(istnieją dwie opcje wyboru gry: gracz vs komputer lub gracz vs gracz; wybór zależy od grającego)</span>
+                        ma do dyspozycji <span class="iside">trzy</span> rzuty, z czego pierwszy z nich jest rzutem
+                        "początkowym" a drugi oraz trzeci jest rzutem "przerzucającym". W drugim i trzecim rzucie,
+                        wyrzuca się jedynie wybrane
+                        przez gracza kostki. Istnieje również opcja zrezygnowania z dodatkowego rzutu - decyzja zależy
+                        od
+                        gracza.
+                    </p>
+                    <p class="info_title">Zapisywanie wyników</p>
+                    <p class="title_description">
+                        Wyniki z rzutów zapisywane są w tabeli zawsze po drugim
+                        <span class="inside">(albo pierwszym - jeśli gracz zrezygnuje z drugiego rzutu)</span> rzucie. W
+                        wierszach tabeli zapisane jest 13 kategorii, które zostaną niżej opisane. Kolumny tabeli, to
+                        kolejni gracze. Każdy z graczy sam wybiera do której kategorii zapisywane będą punkty. Następuje
+                        to poprzez kliknięcie odpowiedniego wiersza tabeli po wykonaniu drugiego rzutu. Każda z
+                        kategorii może zostać wybrana tylko jeden raz.
+                    </p>
+                    <p class="info_title">Kategorie górnej części tabeli</p>
+                    <ul>
+                        <li>Jedynki</li>
+                        <li>Dwójki</li>
+                        <li>Trójki</li>
+                        <li>Czwórki</li>
+                        <li>Piątki</li>
+                        <li>Szóstki</li>
+                    </ul>
+                    <p class="title_description">
+                        W wierszu jednej z powyższych kategorii zostaje wpisywana suma oczek wskazujących wybraną
+                        liczbę. <br>
+                        Przykładowo, jeśli gracz wyrzuci kości <span class="iside">5, 2, 5, 5, 3</span> oraz wybierze
+                        kategorię <span class="inside">"piątki"</span> to uzyska
+                        <span class="inside">15 punktów (3*5)</span>
+                    </p>
+                    <p class="info_title">Premia z górnej części tabeli</p>
+                    <p class="title_description">Jeżeli w któreś z dostępnych kategorii gracz uzyska
+                        <span class="inside">co najmniej 63 punkty lub więcej</span> to otrzymuje on premię w wysokości
+                        35 punktów.</p>
+                    <p class="info_title">Kategorie w dolnej części tabeli</p>
+                    <ul>
+                        <li>3 jednakowe - jeżeli w wyrzuconych kościach występują
+                            <span class="inside">co najmniej 3 jednakowe liczby oczek</span> jako ilość punktów uzyskuje
+                            się sumę z wszystkich pięci kości, np.: dla układu <span class="inside">5, 6, 2, 6, 6</span>
+                            gracz uzyskałby <span class="inside">25 punktów.</span></li>
+                        <li>4 jednakowe - analogicznie, jak wyżej, ale muszą co najmniej cztery jednakowe liczby oczek.
+                        </li>
+                        <li>Full - jeżeli w wyrzuconych kościach występują
+                            <span class="inside">3 jednakowe liczby oczek oraz 2 inne jednakowe, np.: 6,6,6,3,3</span>
+                            to gracz <span class="inside">zawsze otrzymuje 30 punktów.</span></li>
+                        <li>Mały strit - jeżeli w ukłądzie występują cztery kolejne liczby oczek, np.:
+                            <span class="inside">2, 3, 4, 5, 1 lub 6, 1, 2, 3, 4 itd.</span> to gracz
+                            <span class="inside">zawsze otrzymuje 35 punktów.</span></li>
+                        <li>Duży strit - analogicznie jak wyżej, ale liczby oczek ze wszystkich pięciu kości muszą być
+                            kolejnymi liczbami, np.: <span class="inside">2, 3, 4, 5, 6</span>. Gracz otrzymuje wtedy
+                            <span class="inside">50 punktów.</span></li>
+                        <li>Generał - jeżeli liczba oczek na wszystkich pięciu kostkach jest jednakowa, np.:
+                            <span class="inside">1, 1, 1, 1, 1</span> to gracz otrzymuje
+                            <span class="inside">60 punktów.</span></li>
+                        <li>Szansa - bez znaczenia od układu kostek, gracz uzyskuje sumę oczek ze wszystkich kości.</li>
+                    </ul>
+                    <p class="title_description">Każda z dostępnych kategorii może zostać wybrana
+                        <span class="inside">tylko jeden raz</span>. Jeżeli wyrzucona kombinacja kości nie spełnia
+                        określonych wymogów, lub spełnia, ale dana kategoria została już wcześniej wybrana, należy
+                        wybrać jedną z wolnych kategorii otrzymując jednocześnie <span class="inside">0 punktów</span>.
+                        Niestety taki wybór jest czasami konieczny.</p>
+                    <p class="info_title">Generały</p>
+                    <p class="title_description">Wyjątkiem od powyższej reguły dotyczącej dolnych kategorii z tabeli są
+                        generały. Jeżeli gracz wylosuje ponownie generała, może jeszcze raz wybrać tę kategorię. Wtedy
+                        zostanie mu dopisane dodatkowe <span class="inside">10 punktów</span> do kategorii generał.
+                        Wybór generałów jest nieograniczony, jednak należy pamiętać, iż w przypadku, gdy któraś z
+                        dolnych części tabeli nie będzie wypełniona, to po ostatniej kolejce zostanie tam automatycznie
+                        wpisane <span class="inside">0 punktów</span>.</p>
+                    <p class="info_title">Zakończenie gry</p>
+                    <p class="title_description">Po ostatniej kolejce, kiedy wszystkie kategorie są zapełnione następuje
+                        koniec gry. <br>
+                        W przypadku gdy któraś z kategorii nie zostanie uzupełniona, zostaje tam wpisane automatycznie
+                        <span class="inside">0 punktów</span>. Wygrywa ten gracz, który zdobył łącznie największą ilość
+                        punktów.</p>
+                    <p class="author">
+                        Zasady opracowane na podstawie zasad dostępnych na stronie:
+                        <a href="http://snob-shop.pl/zasady-gry-w-kosci/">http://snob-shop.pl/zasady-gry-w-kosci/</a>
+                    </p>
+                </section>
+            </div>
+        </div>
+        <button class="rules on_off">?</button>
+        <section class="game">
+            <p class="round">Runda: <span class="round_number"></span></p>
+            <p class="gamer">Gracz: <span class="gamer_name"></span></p>
+            <p class="throws_number">Ilość rzutów:
+                <span class="throw_number"></span><span class="throw_number"></span><span class="throw_number"></span>
+            </p>
+            <button class="throw">Rzuć kości</button>
+            <p class="dices_info">Wylosowane kości:</p>
+            <div class="dices">
+            </div>
+            <button class="rethrow">Przerzuć kości</button>
+            <p class="chooseOption"><strong>Skończyły się dodatkowe rzuty kości. Wybierz teraz najbardziej odpowiadającą
+                    Ci opcję w tabeli statystyk.</strong></p>
+        </section>
+        <section class="statistics">
+            <table class="statistics_table">
+                <caption>Statystyki</caption>
+                <tr class="gamers_names_row">
+                    <th>Opcje</th>
+                </tr>
+                <tr>
+                    <th>Jedynki</th>
+                    <td class="column_1"></td>
+                    <td class="column_2"></td>
+                </tr>
+                <tr>
+                    <th>Dwójki</th>
+                    <td class="column_1"></td>
+                    <td class="column_2"></td>
+                </tr>
+                <tr>
+                    <th>Trójki</th>
+                    <td class="column_1"></td>
+                    <td class="column_2"></td>
+                </tr>
+                <tr>
+                    <th>Czwórki</th>
+                    <td class="column_1"></td>
+                    <td class="column_2"></td>
+                </tr>
+                <tr>
+                    <th>Piątki</th>
+                    <td class="column_1"></td>
+                    <td class="column_2"></td>
+                </tr>
+                <tr>
+                    <th>Szóstki</th>
+                    <td class="column_1"></td>
+                    <td class="column_2"></td>
+                </tr>
+                <tr class="special">
+                    <th>Premia</th>
+                    <td class="special_row"></td>
+                    <td class="special_row"></td>
+                </tr>
+                <tr class="special">
+                    <th>Suma</th>
+                    <td class="special_row"></td>
+                    <td class="special_row"></td>
+                </tr>
+                <tr>
+                    <th>3 jednakowe</th>
+                    <td class="column_1"></td>
+                    <td class="column_2"></td>
+                </tr>
+                <tr>
+                    <th>4 jednakowe</th>
+                    <td class="column_1"></td>
+                    <td class="column_2"></td>
+                </tr>
+                <tr>
+                    <th>Full</th>
+                    <td class="column_1"></td>
+                    <td class="column_2"></td>
+                </tr>
+                <tr>
+                    <th>Mały strit</th>
+                    <td class="column_1"></td>
+                    <td class="column_2"></td>
+                </tr>
+                <tr>
+                    <th>Duży strit</th>
+                    <td class="column_1"></td>
+                    <td class="column_2"></td>
+                </tr>
+                <tr>
+                    <th>Generał</th>
+                    <td class="column_1"></td>
+                    <td class="column_2"></td>
+                </tr>
+                <tr>
+                    <th>Szansa</th>
+                    <td class="column_1"></td>
+                    <td class="column_2"></td>
+                </tr>
+                <tr class="special">
+                    <th>Suma</th>
+                    <td class="special_row"></td>
+                    <td class="special_row"></td>
+                </tr>
+                <tr class="special">
+                    <th>Razem</th>
+                    <td class="special_row"></td>
+                    <td class="special_row"></td>
+                </tr>
+            </table>
+        </section>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,266 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* general */
+
+.wrapper {
+    max-width: 1200px;
+}
+
+.rules {
+    position: absolute;
+    height: 35px;
+    width: 35px;
+    top: 10px;
+    right: 10px;
+    /* z-index: -1; */
+}
+
+button {
+    cursor: pointer;
+}
+
+/* information window */
+
+.informations {
+    display: none;
+}
+
+.informations.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(150, 150, 150, 0.5);
+    z-index: 1;
+}
+
+.game_rules {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    border: 1px solid black;
+    background-color: rgb(240, 240, 240);
+    overflow: scroll;
+}
+
+.game_rules>* {
+    margin: 15px;
+    word-wrap: break-word;
+    text-align: justify;
+}
+
+.title {
+    text-align: center;
+    font-size: 30px;
+}
+
+.up {
+    display: flex;
+    position: sticky;
+    top: 0;
+    left: 0;
+    margin: 0;
+    height: 30px;
+    border-bottom: 1px solid black;
+    background-color: white;
+}
+
+.up>i {
+    margin: 2px 5px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.up_title {
+    order: -1;
+    align-self: flex-end;
+    margin: 0 auto 0 10px;
+}
+
+.down {
+    margin-top: 5px;
+}
+
+.down>.title+.main_informations {
+    margin: 15px 5px 5px 5px;
+}
+
+.info_title,
+.title_description {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.info_title {
+    margin-top: 15px;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.title_description {
+    margin-top: 5px;
+}
+
+.inside {
+    font-weight: bold;
+}
+
+.info_title+ul {
+    margin-left: 20px;
+}
+
+.info_title+ul>* {
+    margin-top: 10px;
+}
+
+.author {
+    margin: 20px 0 0 5px;
+    font-style: italic;
+}
+
+/* game section */
+
+.game {
+    margin: 10px;
+}
+
+.game>* {
+    margin-top: 10px;
+}
+
+.round,
+.gamer,
+.dices_info,
+.throws_number,
+.chooseOption {
+    font-size: 20px;
+}
+
+.chooseOption {
+    display: none;
+}
+
+.chooseOption.active {
+    display: block;
+}
+
+.throw,
+.rethrow {
+    padding: 6px;
+}
+
+.throw.no_active,
+.rethrow.no_active {
+    display: none;
+}
+
+.dice {
+    font-size: 50px;
+    line-height: 60px;
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+    color: red;
+    text-align: center;
+    cursor: pointer;
+}
+
+.dice.active {
+    background-color: blue;
+}
+
+.throws_number {
+    display: flex;
+}
+
+.throw_number {
+    display: block;
+    margin-left: 10px;
+    flex-basis: 20px;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 50%;
+    background-color: grey;
+}
+
+/* statistics section */
+
+.statistics_table {
+    margin: 20px auto 20px auto;
+    text-align: center;
+}
+
+.statistics_table,
+tr,
+th,
+td {
+    border-collapse: collapse;
+    border: 1px solid black;
+    padding: 10px;
+    font-size: 18px;
+}
+
+caption {
+    margin-bottom: 20px;
+    font-size: 25px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.special {
+    background-color: #aaa;
+}
+
+.column_1,
+.column_2 {
+    cursor: pointer;
+}
+
+.column_1,
+.column_2,
+.special_row {
+    display: none;
+}
+
+.column_1.active,
+.column_2.active,
+.special_row.active {
+    display: table-cell;
+}
+
+/* media */
+
+@media(orientation: landscape) {
+    .wrapper {
+        display: flex;
+    }
+
+    .statistics_table {
+        margin-left: 10px;
+    }
+
+    .game {
+        width: 100%;
+        margin: 55px 0 0 30px;
+        order: 1;
+    }
+}
+
+@media(min-width: 1200px) {
+    .wrapper {
+        position: relative;
+        margin: 30px auto;
+        width: 1200px;
+        border: 1px solid black;
+    }
+
+}
