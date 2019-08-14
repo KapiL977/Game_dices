@@ -10,6 +10,8 @@ class Game {
     startGame(startGameBtn) {
         startGameBtn.style.display = "none";
         const numberOfPlayers = this.player.numberOfPlayers();
+        const playersNames = this.player.playersNames(numberOfPlayers);
+        console.log(numberOfPlayers, playersNames);
     }
 }
 
