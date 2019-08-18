@@ -12,6 +12,13 @@ class Game {
         this.showDicesArea = document.querySelector(".dices");
 
         this.firstFiveDices = this.randomNumberGenerator.generateFiveRandomNumbers();
+        this.dicesClasses = ["fas fa-dice-one dice",
+            "fas fa-dice-two dice",
+            "fas fa-dice-three dice",
+            "fas fa-dice-four dice",
+            "fas fa-dice-five dice",
+            "fas fa-dice-six dice"
+        ];
 
         const startGameBtn = document.querySelector(".start_game");
         const throwDicesBtn = document.querySelector(".throw");
@@ -35,7 +42,16 @@ class Game {
 
     throwDices(throwDicesBtn) {
         throwDicesBtn.classList.toggle("disable");
-        console.log(this.firstFiveDices);
+        this.renderDicesInArea();
+    }
+
+    renderDicesInArea() {
+        let diceElement = '';
+        for (let i = 0; i < this.firstFiveDices.length; i++) {
+            diceElement = document.createElement("i");
+            diceElement.setAttribute("class", this.dicesClasses[this.firstFiveDices[i] - 1]);
+            this.showDicesArea.appendChild(diceElement);
+        }
     }
 }
 
