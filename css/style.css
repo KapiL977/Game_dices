@@ -158,8 +158,8 @@ button {
     padding: 6px;
 }
 
-.throw.no_active,
-.rethrow.no_active {
+.throw.disable,
+.rethrow.disable {
     display: none;
 }
 

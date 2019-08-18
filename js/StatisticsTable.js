@@ -7,8 +7,9 @@ class StatisticsTable {
 
         specialRows.forEach(row => row.classList.toggle("active"));
 
+        let nameCell = '';
         for (let i = 0; i < playersNames.length; i++) {
-            const nameCell = document.createElement("th");
+            nameCell = document.createElement("th");
             nameCell.textContent = playersNames[i];
             playersNamesRow.appendChild(nameCell);
         }

@@ -1,5 +1,5 @@
 class Player {
-    numberOfPlayers() {
+    getNumberOfPlayers() {
         let numberOfPlayers = prompt("Podaj ilość zawodników (max 2, min 1)");
         while (numberOfPlayers <= 0 || numberOfPlayers > 2 || isNaN(numberOfPlayers)) {
             numberOfPlayers = prompt("Podano za mało lub za dużo zawodników! Podaj ilość zawodników (max 2, min 1)");
@@ -7,7 +7,7 @@ class Player {
         return parseInt(numberOfPlayers);
     }
 
-    playersNames(numberOfPlayers) {
+    getPlayersNames(numberOfPlayers) {
         const playersNames = [];
         for (let i = 0; i < numberOfPlayers; i++) {
             let playerName = prompt(`Podaj imię zawodnika ${i + 1} (ograniczenie znaków: max 8, min 1)`);
