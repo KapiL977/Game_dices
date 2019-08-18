@@ -21,4 +21,20 @@ class Player {
 
         return playersNames;
     }
+
+    getDicesToRethrow(dicesInArea) {
+        const dicesToRethrow = [];
+        dicesInArea.forEach((dice, diceIndex) => {
+            dice.addEventListener("click", () => {
+                if (dice.classList.toggle("active")) {
+                    dicesToRethrow.push(diceIndex);
+                } else {
+                    dicesToRethrow.forEach((el, i) => {
+                        if (el === diceIndex) dicesToRethrow.splice(i, 1);
+                    })
+                }
+            })
+        })
+        return dicesToRethrow;
+    }
 }

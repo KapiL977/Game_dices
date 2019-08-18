@@ -11,6 +11,7 @@ class Game {
         this.numberOfThrows = document.querySelectorAll(".throw_number");
         this.showDicesArea = document.querySelector(".dices");
 
+        this.dicesToRethrow = 0;
         this.firstFiveDices = this.randomNumberGenerator.generateFiveRandomNumbers();
         this.dicesClasses = ["fas fa-dice-one dice",
             "fas fa-dice-two dice",
@@ -43,6 +44,9 @@ class Game {
     throwDices(throwDicesBtn) {
         throwDicesBtn.classList.toggle("disable");
         this.renderDicesInArea();
+
+        const dicesInArea = document.querySelectorAll(".dices > *");
+        this.dicesToRethrow = this.player.getDicesToRethrow(dicesInArea)
     }
 
     renderDicesInArea() {
