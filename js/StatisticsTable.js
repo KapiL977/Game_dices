@@ -14,4 +14,18 @@ class StatisticsTable {
             playersNamesRow.appendChild(nameCell);
         }
     }
+
+    addScoreToTable(firstColumn, secondColumn, playerNumber) {
+        for (let i = 0; i < firstColumn.length; i++) {
+            if (playerNumber === 0) {
+                firstColumn[i].addEventListener("click", () => {
+                    console.log("pierwsza kolumna");
+                })
+            } else if (playerNumber === 1) {
+                secondColumn[i].addEventListener("click", () => {
+                    console.log("druga kolumna");
+                })
+            }
+        }
+    }
 }

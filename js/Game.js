@@ -12,8 +12,10 @@ class Game {
         this.showDicesArea = document.querySelector(".dices");
 
         this.counter = 3;
+        this.playerNumber = 0;
+        this.round = 1;
         this.dicesToRethrow = 0;
-        this.firstFiveDices = this.randomNumberGenerator.generateRandomNumbers(5);
+        this.fiveChoseDices = this.randomNumberGenerator.generateRandomNumbers(5);
         this.dicesClasses = ["fas fa-dice-one dice",
             "fas fa-dice-two dice",
             "fas fa-dice-three dice",
@@ -40,8 +42,10 @@ class Game {
         const playersNamesRow = document.querySelector(".gamers_names_row");
         this.statisticsTable.createTableSkeleton(this.firstColumn, this.secondColumn, this.specialRows, playersNames, playersNamesRow);
 
-        this.roundNumber.textContent = 1;
-        this.gamerName.textContent = playersNames[0];
+
+        this.roundNumber.textContent = this.round;
+        this.gamerName.textContent = playersNames[this.playerNumber];
+
     }
 
     throwDices(throwDicesBtn, rethrowDicesBtn) {
@@ -51,6 +55,8 @@ class Game {
         this.giveOptionToChooseDices();
         rethrowDicesBtn.classList.toggle("disable");
         this.numberOfThrows[this.counter].classList.toggle("active");
+
+        this.statisticsTable.addScoreToTable(this.firstColumn, this.secondColumn, this.playerNumber);
     }
 
     rethrowDices(rethrowDicesBtn) {
@@ -63,7 +69,7 @@ class Game {
             const newDicesAfterRethrow = this.randomNumberGenerator.generateRandomNumbers(toRethrowLength);
 
             for (let i = 0; i < toRethrowLength; i++) {
-                this.firstFiveDices.splice(this.dicesToRethrow[i], 1, newDicesAfterRethrow[i]);
+                this.fiveChoseDices.splice(this.dicesToRethrow[i], 1, newDicesAfterRethrow[i]);
             }
 
             this.showDicesArea.innerHTML = '';
@@ -71,15 +77,17 @@ class Game {
             this.giveOptionToChooseDices();
             this.numberOfThrows[this.counter].classList.toggle("active");
             this.canThrowDices(this.counter, rethrowDicesBtn);
+
+            this.statisticsTable.addScoreToTable(this.firstColumn, this.secondColumn, this.playerNumber);
         }
 
     }
 
     renderDicesInArea() {
         let diceElement = '';
-        for (let i = 0; i < this.firstFiveDices.length; i++) {
+        for (let i = 0; i < this.fiveChoseDices.length; i++) {
             diceElement = document.createElement("i");
-            diceElement.setAttribute("class", this.dicesClasses[this.firstFiveDices[i] - 1]);
+            diceElement.setAttribute("class", this.dicesClasses[this.fiveChoseDices[i] - 1]);
             this.showDicesArea.appendChild(diceElement);
         }
     }
