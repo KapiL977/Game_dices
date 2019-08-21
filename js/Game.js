@@ -50,6 +50,7 @@ class Game {
         this.renderDicesInArea();
         this.giveOptionToChooseDices();
         rethrowDicesBtn.classList.toggle("disable");
+        this.numberOfThrows[this.counter].classList.toggle("active");
     }
 
     rethrowDices(rethrowDicesBtn) {
@@ -68,6 +69,7 @@ class Game {
             this.showDicesArea.innerHTML = '';
             this.renderDicesInArea();
             this.giveOptionToChooseDices();
+            this.numberOfThrows[this.counter].classList.toggle("active");
             this.canThrowDices(this.counter, rethrowDicesBtn);
         }
 

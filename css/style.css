@@ -192,6 +192,10 @@ button {
     background-color: grey;
 }
 
+.throw_number.active {
+    background-color: white;
+}
+
 /* statistics section */
 
 .statistics_table {
