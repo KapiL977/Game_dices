@@ -1,7 +1,7 @@
 class RandomNumberGenerator {
-    generateFiveRandomNumbers() {
+    generateRandomNumbers(number) {
         const randomNumbers = [];
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < number; i++) {
             randomNumbers.push(Math.floor(Math.random() * 6) + 1);
         }
         return randomNumbers;
