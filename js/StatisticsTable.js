@@ -1,8 +1,15 @@
 class StatisticsTable {
-    createTableSkeleton(firstColumn, secondColumn, specialRows, playersNames, playersNamesRow) {
-        for (let i = 0; i < firstColumn.length; i++) {
-            firstColumn[i].classList.toggle("active");
-            secondColumn[i].classList.toggle("active");
+    constructor() {
+        this.firstColumn = [...document.querySelectorAll(".column_1")];
+        this.secondColumn = document.querySelectorAll(".column_2");
+
+        this._canAdd = true;
+    }
+
+    createTableSkeleton(specialRows, playersNames, playersNamesRow) {
+        for (let i = 0; i < this.firstColumn.length; i++) {
+            this.firstColumn[i].classList.toggle("active");
+            this.secondColumn[i].classList.toggle("active");
         }
 
         specialRows.forEach(row => row.classList.toggle("active"));
@@ -15,17 +22,26 @@ class StatisticsTable {
         }
     }
 
-    addScoreToTable(firstColumn, secondColumn, playerNumber) {
-        for (let i = 0; i < firstColumn.length; i++) {
-            if (playerNumber === 0) {
-                firstColumn[i].addEventListener("click", () => {
-                    console.log("pierwsza kolumna");
+    addScoreToTable(playerNumber, countedDices) {
+        console.log(this.firstColumn);
+        for (let i = 0; i < this.firstColumn.length; i++) {
+            if (playerNumber === 0 && this._canAdd) {
+                this.firstColumn[i].addEventListener("click", () => {
+                    if (i <= 5) {
+                        console.log(this.firstColumn[i]);
+                        Rules.upperPartOfStatsTable(countedDices, this.firstColumn, i);
+                        console.log(i);
+                        this.firstColumn[i].style.pointerEvents = "none";
+                    } else {
+                        Rules.lowerPartOfStatsTable(countedDices, this.firstColumn, i);
+                    }
                 })
-            } else if (playerNumber === 1) {
-                secondColumn[i].addEventListener("click", () => {
+            } else if (playerNumber === 1 && this._canAdd) {
+                this.secondColumn[i].addEventListener("click", () => {
                     console.log("druga kolumna");
                 })
             }
         }
+        this._canAdd = false;
     }
 }

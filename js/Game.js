@@ -3,8 +3,6 @@ class Game {
         this.player = new Player();
         this.statisticsTable = new StatisticsTable();
         this.randomNumberGenerator = new RandomNumberGenerator();
-        this.firstColumn = document.querySelectorAll(".column_1");
-        this.secondColumn = document.querySelectorAll(".column_2");
         this.specialRows = document.querySelectorAll(".special_row");
         this.roundNumber = document.querySelector(".round_number");
         this.gamerName = document.querySelector(".gamer_name");
@@ -40,12 +38,11 @@ class Game {
         console.log(numberOfPlayers, playersNames);
 
         const playersNamesRow = document.querySelector(".gamers_names_row");
-        this.statisticsTable.createTableSkeleton(this.firstColumn, this.secondColumn, this.specialRows, playersNames, playersNamesRow);
+        this.statisticsTable.createTableSkeleton(this.specialRows, playersNames, playersNamesRow);
 
 
         this.roundNumber.textContent = this.round;
         this.gamerName.textContent = playersNames[this.playerNumber];
-
     }
 
     throwDices(throwDicesBtn, rethrowDicesBtn) {
@@ -56,7 +53,8 @@ class Game {
         rethrowDicesBtn.classList.toggle("disable");
         this.numberOfThrows[this.counter].classList.toggle("active");
 
-        this.statisticsTable.addScoreToTable(this.firstColumn, this.secondColumn, this.playerNumber);
+        const countedDices = this.countNumberOfDices(this.fiveChoseDices);
+        this.statisticsTable.addScoreToTable(this.playerNumber, countedDices);
     }
 
     rethrowDices(rethrowDicesBtn) {
@@ -78,7 +76,8 @@ class Game {
             this.numberOfThrows[this.counter].classList.toggle("active");
             this.canThrowDices(this.counter, rethrowDicesBtn);
 
-            this.statisticsTable.addScoreToTable(this.firstColumn, this.secondColumn, this.playerNumber);
+            const countedDices = this.countNumberOfDices(this.fiveChoseDices);
+            this.statisticsTable.addScoreToTable(this.playerNumber, countedDices);
         }
 
     }
@@ -105,6 +104,24 @@ class Game {
             rethrowDicesBtn.classList.toggle("disable");
             endOfThrows.classList.toggle("active");
         }
+    }
+
+    countNumberOfDices(dices) {
+        const count = {
+            1: 0,
+            2: 0,
+            3: 0,
+            4: 0,
+            5: 0,
+            6: 0
+        };
+        let number = 0;
+        for (let i = 0; i < dices.length; i++) {
+            number = dices[i];
+            count[number] = count[number] ? count[number] + 1 : 1;
+        }
+        console.log(count);
+        return count;
     }
 
 }
