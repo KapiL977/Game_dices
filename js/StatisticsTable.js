@@ -3,6 +3,7 @@ class StatisticsTable {
         this.firstColumn = [...document.querySelectorAll(".column_1")];
         this.secondColumn = document.querySelectorAll(".column_2");
 
+        this.countedDices = '';
         this._canAdd = true;
     }
 
@@ -23,17 +24,16 @@ class StatisticsTable {
     }
 
     addScoreToTable(playerNumber, countedDices) {
-        console.log(this.firstColumn);
+        this.countedDices = countedDices;
         for (let i = 0; i < this.firstColumn.length; i++) {
             if (playerNumber === 0 && this._canAdd) {
                 this.firstColumn[i].addEventListener("click", () => {
+                    console.log("x")
                     if (i <= 5) {
-                        console.log(this.firstColumn[i]);
-                        Rules.upperPartOfStatsTable(countedDices, this.firstColumn, i);
-                        console.log(i);
+                        Rules.upperPartOfStatsTable(this.countedDices, this.firstColumn, i);
                         this.firstColumn[i].style.pointerEvents = "none";
                     } else {
-                        Rules.lowerPartOfStatsTable(countedDices, this.firstColumn, i);
+                        Rules.lowerPartOfStatsTable(this.countedDices, this.firstColumn, i);
                     }
                 })
             } else if (playerNumber === 1 && this._canAdd) {

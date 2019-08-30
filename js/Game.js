@@ -120,7 +120,6 @@ class Game {
             number = dices[i];
             count[number] = count[number] ? count[number] + 1 : 1;
         }
-        console.log(count);
         return count;
     }
 
