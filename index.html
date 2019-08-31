@@ -25,7 +25,7 @@
                     <h1 class="title">Witaj w grze w kości!</h1>
                     <p class="main_informations">
                         Poniższa odmiana gry w kości jest projektem tworzonym w ramach nauki. Zasady różnią się w
-                        nieznacznym stopniu od "ogólnie przyjętych" zasad gry w kości. Panujące w grze zasady zostaną
+                        nieznacznym stopniu od "ogólnie przyjętych" zasad gry w kości. Panujące w grze zasady zostały
                         poniżej dokładnie opisane. Jeśli chcesz wyłączyć okno zasad, kliknij w krzyżyk w prawym rogu
                         okna.
                         <br>
@@ -38,13 +38,14 @@
                     </p>
                     <p class="info_title">Kolejki oraz gracze</p>
                     <p class="title_description">
-                        W grze jest dostępnych 13 kolejek. W każdej z nich, każdy z graczy, których jest maksymalnie
+                        W grze jest dostępnych 13 rund. W każdej z nich, każdy z graczy, których jest maksymalnie
                         dwóch
-                        <span class="inside">(istnieją dwie opcje wyboru gry: gracz vs komputer lub gracz vs gracz; wybór zależy od grającego)</span>
+                        <span class="inside">(istnieją dwie opcje wyboru gry: gracz vs komputer lub gracz vs gracz; wybór zależy od grającego i jest dokonywany po kliknięciu przycisku "Rozpocznij grę")</span>
                         ma do dyspozycji <span class="iside">trzy</span> rzuty, z czego pierwszy z nich jest rzutem
-                        "początkowym" a drugi oraz trzeci jest rzutem "przerzucającym". W drugim i trzecim rzucie,
+                        "początkowym", a drugi oraz trzeci jest rzutem "przerzucającym". W drugim i trzecim rzucie,
                         wyrzuca się jedynie wybrane
-                        przez gracza kostki. Istnieje również opcja zrezygnowania z dodatkowego rzutu - decyzja zależy
+                        przez gracza kostki. Istnieje również opcja zrezygnowania z dodatkowego rzutu - wtedy należy
+                        wybrać jedną z możliwości w tabeli statystyk. Decyzja zależy
                         od
                         gracza.
                     </p>
@@ -52,10 +53,10 @@
                     <p class="title_description">
                         Wyniki z rzutów zapisywane są w tabeli zawsze po drugim
                         <span class="inside">(albo pierwszym - jeśli gracz zrezygnuje z drugiego rzutu)</span> rzucie. W
-                        wierszach tabeli zapisane jest 13 kategorii, które zostaną niżej opisane. Kolumny tabeli, to
+                        wierszach tabeli zapisane jest 13 kategorii, które zostały niżej opisane. Kolumny tabeli, to
                         kolejni gracze. Każdy z graczy sam wybiera do której kategorii zapisywane będą punkty. Następuje
-                        to poprzez kliknięcie odpowiedniego wiersza tabeli po wykonaniu drugiego rzutu. Każda z
-                        kategorii może zostać wybrana tylko jeden raz.
+                        to poprzez kliknięcie odpowiedniej komórki w odpowiednim wierszu tabeli. Każda z
+                        kategorii może zostać wybrana tylko jeden raz <span class="inside">(wyjątek - generały).</span>
                     </p>
                     <p class="info_title">Kategorie górnej części tabeli</p>
                     <ul>
@@ -71,12 +72,12 @@
                         liczbę. <br>
                         Przykładowo, jeśli gracz wyrzuci kości <span class="iside">5, 2, 5, 5, 3</span> oraz wybierze
                         kategorię <span class="inside">"piątki"</span> to uzyska
-                        <span class="inside">15 punktów (3*5)</span>
+                        <span class="inside">15 punktów (3*5).</span>
                     </p>
                     <p class="info_title">Premia z górnej części tabeli</p>
                     <p class="title_description">Jeżeli w któreś z dostępnych kategorii gracz uzyska
                         <span class="inside">co najmniej 63 punkty lub więcej</span> to otrzymuje on premię w wysokości
-                        35 punktów.</p>
+                        35 punktów. Premia jest przyznawana jednorazowo.</p>
                     <p class="info_title">Kategorie w dolnej części tabeli</p>
                     <ul>
                         <li>3 jednakowe - jeżeli w wyrzuconych kościach występują
@@ -100,19 +101,24 @@
                         <li>Szansa - bez znaczenia od układu kostek, gracz uzyskuje sumę oczek ze wszystkich kości.</li>
                     </ul>
                     <p class="title_description">Każda z dostępnych kategorii może zostać wybrana
-                        <span class="inside">tylko jeden raz</span>. Jeżeli wyrzucona kombinacja kości nie spełnia
+                        <span class="inside">tylko jeden raz (wyjątek - generały)</span>. Jeżeli wyrzucona kombinacja
+                        kości nie spełnia
                         określonych wymogów, lub spełnia, ale dana kategoria została już wcześniej wybrana, należy
                         wybrać jedną z wolnych kategorii otrzymując jednocześnie <span class="inside">0 punktów</span>.
-                        Niestety taki wybór jest czasami konieczny.</p>
+                        Niestety taki wybór jest czasami konieczny.
+                        <span class="inside">Podczas gry nie jest sprawdzane, czy wyrzucone kości spełniają któryś z wyżej opisanych warunków. Jeśli gracz nie będzie spełniał tych warunków i wybierze jedno z pól w dolnej części tabeli - otrzyma 0 punktów. <br/>
+                    Dla lepszego zobrazowania sytuacji: gracz losuje kości 2,3,4,5,6 i wybiera kategorię "3 jednakowe" - otrzymuje on do tej kategorii 0 punktów.</span>
+                    </p>
                     <p class="info_title">Generały</p>
                     <p class="title_description">Wyjątkiem od powyższej reguły dotyczącej dolnych kategorii z tabeli są
                         generały. Jeżeli gracz wylosuje ponownie generała, może jeszcze raz wybrać tę kategorię. Wtedy
                         zostanie mu dopisane dodatkowe <span class="inside">10 punktów</span> do kategorii generał.
                         Wybór generałów jest nieograniczony, jednak należy pamiętać, iż w przypadku, gdy któraś z
-                        dolnych części tabeli nie będzie wypełniona, to po ostatniej kolejce zostanie tam automatycznie
-                        wpisane <span class="inside">0 punktów</span>.</p>
+                        dolnych części tabeli nie będzie wypełniona, to po ostatniej rundzie zostanie tam automatycznie
+                        wpisane <span class="inside">0 punktów</span>. Dlatego warto zastanowić się nad ponownym
+                        wybraniem tej kategorii.</p>
                     <p class="info_title">Zakończenie gry</p>
-                    <p class="title_description">Po ostatniej kolejce, kiedy wszystkie kategorie są zapełnione następuje
+                    <p class="title_description">Po ostatniej rundzie, kiedy wszystkie kategorie są zapełnione następuje
                         koniec gry. <br>
                         W przypadku gdy któraś z kategorii nie zostanie uzupełniona, zostaje tam wpisane automatycznie
                         <span class="inside">0 punktów</span>. Wygrywa ten gracz, który zdobył łącznie największą ilość
