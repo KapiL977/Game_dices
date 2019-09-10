@@ -28,12 +28,13 @@ class StatisticsTable {
         for (let i = 0; i < this.firstColumn.length; i++) {
             if (playerNumber === 0 && this._canAdd) {
                 this.firstColumn[i].addEventListener("click", () => {
-                    console.log("x")
                     if (i <= 5) {
                         Rules.upperPartOfStatsTable(this.countedDices, this.firstColumn, i);
                         this.firstColumn[i].style.pointerEvents = "none";
                     } else {
                         Rules.lowerPartOfStatsTable(this.countedDices, this.firstColumn, i);
+                        this.firstColumn[i].style.pointerEvents = "none";
+                        if (i === 11) this.firstColumn[i].style.pointerEvents = "auto";
                     }
                 })
             } else if (playerNumber === 1 && this._canAdd) {
