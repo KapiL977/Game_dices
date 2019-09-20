@@ -8,7 +8,12 @@ class Game {
         this.gamerName = document.querySelector(".gamer_name");
         this.numberOfThrows = document.querySelectorAll(".throw_number");
         this.showDicesArea = document.querySelector(".dices");
+        this.firstColumn = [...document.querySelectorAll(".column_1")];
+        this.secondColumn = [...document.querySelectorAll(".column_2")];
 
+        this.secondColumn.forEach(cell => cell.style.pointerEvents = "none");
+
+        this.countedDices = '';
         this.counter = 3;
         this.playerNumber = 0;
         this.round = 1;
@@ -29,6 +34,13 @@ class Game {
         startGameBtn.addEventListener("click", () => this.startGame(startGameBtn));
         throwDicesBtn.addEventListener("click", () => this.throwDices(throwDicesBtn, rethrowDicesBtn));
         rethrowDicesBtn.addEventListener("click", () => this.rethrowDices(rethrowDicesBtn));
+
+
+        for (let i = 0; i < this.firstColumn.length; i++) {
+            this.firstColumn[i].addEventListener("click", this.afterClickInCell.bind(this, i));
+            this.secondColumn[i].addEventListener("click", this.afterClickInCell.bind(this, i));
+        }
+
     }
 
     startGame(startGameBtn) {
@@ -38,7 +50,7 @@ class Game {
         console.log(numberOfPlayers, playersNames);
 
         const playersNamesRow = document.querySelector(".gamers_names_row");
-        this.statisticsTable.createTableSkeleton(this.specialRows, playersNames, playersNamesRow);
+        this.statisticsTable.createTableSkeleton(this.specialRows, playersNames, playersNamesRow, this.firstColumn, this.secondColumn);
 
 
         this.roundNumber.textContent = this.round;
@@ -53,15 +65,15 @@ class Game {
         rethrowDicesBtn.classList.toggle("disable");
         this.numberOfThrows[this.counter].classList.toggle("active");
 
-        const countedDices = this.countNumberOfDices(this.fiveChoseDices);
-        this.statisticsTable.addScoreToTable(this.playerNumber, countedDices);
+        this.countedDices = this.countNumberOfDices(this.fiveChoseDices);
     }
 
     rethrowDices(rethrowDicesBtn) {
-        this.counter--;
+        console.log(this.playerNumber);
         if (this.dicesToRethrow.length === 0) {
             alert("Musisz wybrać jakieś kości do przerzucenia! \nJeśli nie chcesz przerzucać żadnych kości - kliknij w jedną z kategorii w tabeli statystyk by zakończyć rundę.");
         } else {
+            this.counter--;
             this.dicesToRethrow = this.dicesToRethrow.sort((lower, bigger) => lower - bigger);
             const toRethrowLength = this.dicesToRethrow.length;
             const newDicesAfterRethrow = this.randomNumberGenerator.generateRandomNumbers(toRethrowLength);
@@ -75,9 +87,7 @@ class Game {
             this.giveOptionToChooseDices();
             this.numberOfThrows[this.counter].classList.toggle("active");
             this.canThrowDices(this.counter, rethrowDicesBtn);
-
-            const countedDices = this.countNumberOfDices(this.fiveChoseDices);
-            this.statisticsTable.addScoreToTable(this.playerNumber, countedDices);
+            this.countedDices = this.countNumberOfDices(this.fiveChoseDices);
         }
 
     }
@@ -122,6 +132,19 @@ class Game {
         }
         return count;
     }
+
+    afterClickInCell(i) {
+        this.statisticsTable.addScoreToTable(this.playerNumber, this.countedDices, i, this.firstColumn, this.secondColumn);
+        if (this.playerNumber === 0) {
+            // console.log("x");
+            this.playerNumber = 1;
+        } else if (this.playerNumber === 1) {
+            // console.log("y");
+            this.playerNumber = 0;
+        }
+    }
+
+
 
 }
 

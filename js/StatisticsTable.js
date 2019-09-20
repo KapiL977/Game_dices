@@ -1,16 +1,14 @@
 class StatisticsTable {
     constructor() {
-        this.firstColumn = [...document.querySelectorAll(".column_1")];
-        this.secondColumn = document.querySelectorAll(".column_2");
-
+        this.firstColumnCellsAfterClick = [];
+        this.secondColumnCellsAfterClick = [];
         this.countedDices = '';
-        this._canAdd = true;
     }
 
-    createTableSkeleton(specialRows, playersNames, playersNamesRow) {
-        for (let i = 0; i < this.firstColumn.length; i++) {
-            this.firstColumn[i].classList.toggle("active");
-            this.secondColumn[i].classList.toggle("active");
+    createTableSkeleton(specialRows, playersNames, playersNamesRow, firstColumn, secondColumn) {
+        for (let i = 0; i < firstColumn.length; i++) {
+            firstColumn[i].classList.toggle("active");
+            secondColumn[i].classList.toggle("active");
         }
 
         specialRows.forEach(row => row.classList.toggle("active"));
@@ -23,26 +21,36 @@ class StatisticsTable {
         }
     }
 
-    addScoreToTable(playerNumber, countedDices) {
+    addScoreToTable(playerNumber, countedDices, i, firstColumn, secondColumn) {
         this.countedDices = countedDices;
-        for (let i = 0; i < this.firstColumn.length; i++) {
-            if (playerNumber === 0 && this._canAdd) {
-                this.firstColumn[i].addEventListener("click", () => {
-                    if (i <= 5) {
-                        Rules.upperPartOfStatsTable(this.countedDices, this.firstColumn, i);
-                        this.firstColumn[i].style.pointerEvents = "none";
-                    } else {
-                        Rules.lowerPartOfStatsTable(this.countedDices, this.firstColumn, i);
-                        this.firstColumn[i].style.pointerEvents = "none";
-                        if (i === 11) this.firstColumn[i].style.pointerEvents = "auto";
-                    }
-                })
-            } else if (playerNumber === 1 && this._canAdd) {
-                this.secondColumn[i].addEventListener("click", () => {
-                    console.log("druga kolumna");
-                })
+        if (playerNumber === 0) {
+            if (i <= 5) {
+                Rules.upperPartOfStatsTable(this.countedDices, firstColumn, i);
+            } else {
+                Rules.lowerPartOfStatsTable(this.countedDices, firstColumn, i);
             }
+
+            this.firstColumnCellsAfterClick.push(i);
+            firstColumn.forEach(cell => cell.style.pointerEvents = "none");
+            secondColumn.forEach(cell => cell.style.pointerEvents = "auto");
+            this.secondColumnCellsAfterClick.forEach(cell => {
+                secondColumn[cell].style.pointerEvents = "none";
+            })
+
+        } else if (playerNumber === 1) {
+            if (i <= 5) {
+                Rules.upperPartOfStatsTable(this.countedDices, secondColumn, i);
+            } else {
+                Rules.lowerPartOfStatsTable(this.countedDices, secondColumn, i);
+            }
+
+            this.secondColumnCellsAfterClick.push(i);
+            secondColumn.forEach(cell => cell.style.pointerEvents = "none");
+            firstColumn.forEach(cell => cell.style.pointerEvents = "auto");
+            this.firstColumnCellsAfterClick.forEach(cell => {
+                firstColumn[cell].style.pointerEvents = "none";
+            })
+
         }
-        this._canAdd = false;
     }
 }
