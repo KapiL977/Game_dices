@@ -8,17 +8,20 @@ class Game {
         this.gamerName = document.querySelector(".gamer_name");
         this.numberOfThrows = document.querySelectorAll(".throw_number");
         this.showDicesArea = document.querySelector(".dices");
+        this.endOfThrows = document.querySelector(".chooseOption");
         this.firstColumn = [...document.querySelectorAll(".column_1")];
         this.secondColumn = [...document.querySelectorAll(".column_2")];
 
+
         this.secondColumn.forEach(cell => cell.style.pointerEvents = "none");
 
+        this.playersNames = [];
         this.countedDices = '';
         this.counter = 3;
         this.playerNumber = 0;
         this.round = 1;
         this.dicesToRethrow = 0;
-        this.fiveChoseDices = this.randomNumberGenerator.generateRandomNumbers(5);
+        this.fiveChoseDices = [];
         this.dicesClasses = ["fas fa-dice-one dice",
             "fas fa-dice-two dice",
             "fas fa-dice-three dice",
@@ -28,12 +31,12 @@ class Game {
         ];
 
         const startGameBtn = document.querySelector(".start_game");
-        const throwDicesBtn = document.querySelector(".throw");
-        const rethrowDicesBtn = document.querySelector(".rethrow");
+        this.throwDicesBtn = document.querySelector(".throw");
+        this.rethrowDicesBtn = document.querySelector(".rethrow");
 
         startGameBtn.addEventListener("click", () => this.startGame(startGameBtn));
-        throwDicesBtn.addEventListener("click", () => this.throwDices(throwDicesBtn, rethrowDicesBtn));
-        rethrowDicesBtn.addEventListener("click", () => this.rethrowDices(rethrowDicesBtn));
+        this.throwDicesBtn.addEventListener("click", this.throwDices);
+        this.rethrowDicesBtn.addEventListener("click", this.rethrowDices);
 
 
         for (let i = 0; i < this.firstColumn.length; i++) {
@@ -46,29 +49,31 @@ class Game {
     startGame(startGameBtn) {
         startGameBtn.style.display = "none";
         const numberOfPlayers = this.player.getNumberOfPlayers();
-        const playersNames = this.player.getPlayersNames(numberOfPlayers);
-        console.log(numberOfPlayers, playersNames);
+        this.playersNames = this.player.getPlayersNames(numberOfPlayers);
+        console.log(numberOfPlayers, this.playersNames);
 
         const playersNamesRow = document.querySelector(".gamers_names_row");
-        this.statisticsTable.createTableSkeleton(this.specialRows, playersNames, playersNamesRow, this.firstColumn, this.secondColumn);
+        this.statisticsTable.createTableSkeleton(this.specialRows, this.playersNames, playersNamesRow, this.firstColumn, this.secondColumn);
 
 
         this.roundNumber.textContent = this.round;
-        this.gamerName.textContent = playersNames[this.playerNumber];
+        this.gamerName.textContent = this.playersNames[this.playerNumber];
     }
 
-    throwDices(throwDicesBtn, rethrowDicesBtn) {
+    throwDices = () => {
+        console.log(this.counter)
+        this.fiveChoseDices = this.randomNumberGenerator.generateRandomNumbers(5);
         this.counter--;
-        throwDicesBtn.classList.toggle("disable");
+        this.throwDicesBtn.classList.toggle("disable");
         this.renderDicesInArea();
         this.giveOptionToChooseDices();
-        rethrowDicesBtn.classList.toggle("disable");
+        this.rethrowDicesBtn.classList.toggle("disable");
         this.numberOfThrows[this.counter].classList.toggle("active");
 
         this.countedDices = this.countNumberOfDices(this.fiveChoseDices);
     }
 
-    rethrowDices(rethrowDicesBtn) {
+    rethrowDices = () => {
         console.log(this.playerNumber);
         if (this.dicesToRethrow.length === 0) {
             alert("Musisz wybrać jakieś kości do przerzucenia! \nJeśli nie chcesz przerzucać żadnych kości - kliknij w jedną z kategorii w tabeli statystyk by zakończyć rundę.");
@@ -86,7 +91,7 @@ class Game {
             this.renderDicesInArea();
             this.giveOptionToChooseDices();
             this.numberOfThrows[this.counter].classList.toggle("active");
-            this.canThrowDices(this.counter, rethrowDicesBtn);
+            this.canThrowDices(this.counter, this.rethrowDicesBtn);
             this.countedDices = this.countNumberOfDices(this.fiveChoseDices);
         }
 
@@ -109,10 +114,9 @@ class Game {
     }
 
     canThrowDices(counter, rethrowDicesBtn) {
-        const endOfThrows = document.querySelector(".chooseOption");
         if (counter === 0) {
             rethrowDicesBtn.classList.toggle("disable");
-            endOfThrows.classList.toggle("active");
+            this.endOfThrows.classList.toggle("active");
         }
     }
 
@@ -135,13 +139,36 @@ class Game {
 
     afterClickInCell(i) {
         this.statisticsTable.addScoreToTable(this.playerNumber, this.countedDices, i, this.firstColumn, this.secondColumn);
+
         if (this.playerNumber === 0) {
             // console.log("x");
             this.playerNumber = 1;
         } else if (this.playerNumber === 1) {
             // console.log("y");
             this.playerNumber = 0;
+            this.round++;
+            this.roundNumber.textContent = this.round;
         }
+
+        this.renderGameArea();
+    }
+
+    renderGameArea() {
+        if (this.counter === 0) {
+            this.endOfThrows.classList.toggle("active");
+        } else {
+            this.rethrowDicesBtn.classList.toggle("disable");
+        }
+        this.gamerName.textContent = this.playersNames[this.playerNumber];
+        this.counter = 3;
+        this.numberOfThrows.forEach(throwNumber => {
+            if (throwNumber.classList.contains("active")) {
+                throwNumber.classList.toggle("active")
+            }
+        })
+        this.throwDicesBtn.classList.toggle("disable");
+        this.showDicesArea.innerHTML = '';
+        this.fiveChoseDices = [];
     }
 
 
