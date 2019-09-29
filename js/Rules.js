@@ -1,11 +1,13 @@
 class Rules {
-    static upperPartOfStatsTable(countedDices, column, i) {
+    constructor() {
+
+    }
+    upperPartOfStatsTable(countedDices, column, i, specialRows, playerNumber) {
         column[i].textContent = (i + 1) * countedDices[i + 1];
-        // add bonus 
 
     }
 
-    static lowerPartOfStatsTable(countedDices, column, i) {
+    lowerPartOfStatsTable(countedDices, column, i) {
         // countedDices = {
         //     1: 1,
         //     2: 1,
