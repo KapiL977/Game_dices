@@ -1,18 +1,6 @@
 class Rules {
     static upperPartOfStatsTable(countedDices, column, i) {
-        if (i === 0) {
-            column[i].textContent = 1 * countedDices[i + 1];
-        } else if (i === 1) {
-            column[i].textContent = 2 * countedDices[i + 1];
-        } else if (i === 2) {
-            column[i].textContent = 3 * countedDices[i + 1];
-        } else if (i === 3) {
-            column[i].textContent = 4 * countedDices[i + 1];
-        } else if (i === 4) {
-            column[i].textContent = 5 * countedDices[i + 1];
-        } else if (i === 5) {
-            column[i].textContent = 6 * countedDices[i + 1];
-        }
+        column[i].textContent = (i + 1) * countedDices[i + 1];
         // add bonus 
     }
 
