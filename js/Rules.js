@@ -1,10 +1,8 @@
 class Rules {
     constructor() {
         this.specialRows = document.querySelectorAll(".special_row");
-        this.countFirstPlayerScore = 0;
-        this.countSecondPlayerScore = 0;
-        this.countFirstPlayerLower = 0;
-        this.countSecondPlayerLower = 0;
+        this.countFirstPlayerScore = [0, 0];
+        this.countSecondPlayerScore = [0, 0];
         this._canAddFirstPlayer = true;
         this._canAddSecondPlayer = true;
     }
@@ -13,17 +11,10 @@ class Rules {
         let scoreIntoTable = (i + 1) * countedDices[i + 1];
         column[i].textContent = scoreIntoTable;
         this.upperPartSpecialRows(playerNumber, scoreIntoTable);
+        this.showFinalResult(playerNumber);
     }
 
     lowerPartOfStatsTable(countedDices, column, i, playerNumber) {
-        countedDices = {
-            1: 5,
-            2: 0,
-            3: 0,
-            4: 0,
-            5: 0,
-            6: 0
-        }
         let points = 0;
         const countedDicesArray = Object.values(countedDices);
         const arrayLength = countedDicesArray.length;
@@ -39,9 +30,9 @@ class Rules {
             column[i].textContent = points;
             //add score to special row
             if (playerNumber === 0) {
-                this.countFirstPlayerLower += points;
+                this.countFirstPlayerScore[1] += points;
             } else if (playerNumber === 1) {
-                this.countSecondPlayerLower += points;
+                this.countSecondPlayerScore[1] += points;
             }
 
         } else if (i === 7) {
@@ -56,9 +47,9 @@ class Rules {
             column[i].textContent = points;
             //add score to special row
             if (playerNumber === 0) {
-                this.countFirstPlayerLower += points;
+                this.countFirstPlayerScore[1] += points;
             } else if (playerNumber === 1) {
-                this.countSecondPlayerLower += points;
+                this.countSecondPlayerScore[1] += points;
             }
 
         } else if (i === 8) {
@@ -70,9 +61,9 @@ class Rules {
                             column[i].textContent = 30;
                             //add score to special row
                             if (playerNumber === 0) {
-                                this.countFirstPlayerLower += 30;
+                                this.countFirstPlayerScore[1] += 30;
                             } else if (playerNumber === 1) {
-                                this.countSecondPlayerLower += 30;
+                                this.countSecondPlayerScore[1] += 30;
                             }
                             break;
                         } else {
@@ -80,9 +71,9 @@ class Rules {
                             column[i].textContent = points;
                             //add score to special row
                             if (playerNumber === 0) {
-                                this.countFirstPlayerLower += points;
+                                this.countFirstPlayerScore[1] += points;
                             } else if (playerNumber === 1) {
-                                this.countSecondPlayerLower += points;
+                                this.countSecondPlayerScore[1] += points;
                             }
                         }
                     }
@@ -92,9 +83,9 @@ class Rules {
                     column[i].textContent = points;
                     //add score to special row
                     if (playerNumber === 0) {
-                        this.countFirstPlayerLower += points;
+                        this.countFirstPlayerScore[1] += points;
                     } else if (playerNumber === 1) {
-                        this.countSecondPlayerLower += points;
+                        this.countSecondPlayerScore[1] += points;
                     }
                 }
             }
@@ -118,18 +109,18 @@ class Rules {
                 column[i].textContent = 35;
                 //add score to special row
                 if (playerNumber === 0) {
-                    this.countFirstPlayerLower += 35;
+                    this.countFirstPlayerScore[1] += 35;
                 } else if (playerNumber === 1) {
-                    this.countSecondPlayerLower += 35;
+                    this.countSecondPlayerScore[1] += 35;
                 }
             } else {
                 // add score to table
                 column[i].textContent = points;
                 // add score to special row
                 if (playerNumber === 0) {
-                    this.countFirstPlayerLower += points;
+                    this.countFirstPlayerScore[1] += points;
                 } else if (playerNumber === 1) {
-                    this.countSecondPlayerLower += points;
+                    this.countSecondPlayerScore[1] += points;
                 }
             };
 
@@ -145,18 +136,18 @@ class Rules {
                 column[i].textContent = 50;
                 //add score to special row
                 if (playerNumber === 0) {
-                    this.countFirstPlayerLower += 50;
+                    this.countFirstPlayerScore[1] += 50;
                 } else if (playerNumber === 1) {
-                    this.countSecondPlayerLower += 50;
+                    this.countSecondPlayerScore[1] += 50;
                 }
             } else {
                 //add score to table
                 column[i].textContent = points;
                 //add score to special row
                 if (playerNumber === 0) {
-                    this.countFirstPlayerLower += points;
+                    this.countFirstPlayerScore[1] += points;
                 } else if (playerNumber === 1) {
-                    this.countSecondPlayerLower += points;
+                    this.countSecondPlayerScore[1] += points;
                 }
             }
         } else if (i === 11) {
@@ -166,9 +157,9 @@ class Rules {
                     column[i].textContent = 60;
                     //add score to special row
                     if (playerNumber === 0) {
-                        this.countFirstPlayerLower += 60;
+                        this.countFirstPlayerScore[1] += 60;
                     } else if (playerNumber === 1) {
-                        this.countSecondPlayerLower += 60;
+                        this.countSecondPlayerScore[1] += 60;
                     }
                     break;
                 } else {
@@ -176,9 +167,9 @@ class Rules {
                     column[i].textContent = points;
                     //add score to special row
                     if (playerNumber === 0) {
-                        this.countFirstPlayerLower += points;
+                        this.countFirstPlayerScore[1] += points;
                     } else if (playerNumber === 1) {
-                        this.countSecondPlayerLower += points;
+                        this.countSecondPlayerScore[1] += points;
                     }
                 }
             }
@@ -189,40 +180,49 @@ class Rules {
             column[i].textContent = counter;
             //add score to special row
             if (playerNumber === 0) {
-                this.countFirstPlayerLower += counter;
+                this.countFirstPlayerScore[1] += counter;
             } else if (playerNumber === 1) {
-                this.countSecondPlayerLower += counter;
+                this.countSecondPlayerScore[1] += counter;
             }
         }
 
         this.lowerPartSpecialRow(playerNumber);
+        this.showFinalResult(playerNumber);
     }
 
     upperPartSpecialRows = (playerNumber, scoreIntoTable) => {
         if (playerNumber === 0) {
-            this.countFirstPlayerScore += scoreIntoTable;
-            if (this.countFirstPlayerScore >= 15 && this._canAddFirstPlayer) {
+            this.countFirstPlayerScore[0] += scoreIntoTable;
+            if (this.countFirstPlayerScore[0] >= 63 && this._canAddFirstPlayer) {
                 this.specialRows[0].textContent = 35;
-                this.countFirstPlayerScore += 35;
+                this.countFirstPlayerScore[0] += 35;
                 this._canAddFirstPlayer = false;
             }
-            this.specialRows[2].textContent = this.countFirstPlayerScore;
+            this.specialRows[2].textContent = this.countFirstPlayerScore[0];
         } else if (playerNumber === 1) {
-            this.countSecondPlayerScore += scoreIntoTable;
-            if (this.countSecondPlayerScore >= 15 && this._canAddSecondPlayer) {
+            this.countSecondPlayerScore[0] += scoreIntoTable;
+            if (this.countSecondPlayerScore[0] >= 63 && this._canAddSecondPlayer) {
                 this.specialRows[1].textContent = 35;
-                this.countSecondPlayerScore += 35;
+                this.countSecondPlayerScore[0] += 35;
                 this._canAddSecondPlayer = false;
             }
-            this.specialRows[3].textContent = this.countSecondPlayerScore;
+            this.specialRows[3].textContent = this.countSecondPlayerScore[0];
         }
     }
 
     lowerPartSpecialRow = (playerNumber) => {
         if (playerNumber === 0) {
-            this.specialRows[4].textContent = this.countFirstPlayerLower;
+            this.specialRows[4].textContent = this.countFirstPlayerScore[1];
         } else if (playerNumber === 1) {
-            this.specialRows[5].textContent = this.countSecondPlayerLower;
+            this.specialRows[5].textContent = this.countSecondPlayerScore[1];
+        }
+    }
+
+    showFinalResult = (playerNumber) => {
+        if (playerNumber === 0) {
+            this.specialRows[6].textContent = (this.countFirstPlayerScore[0] + this.countFirstPlayerScore[1]);
+        } else if (playerNumber === 1) {
+            this.specialRows[7].textContent = (this.countSecondPlayerScore[0] + this.countSecondPlayerScore[1]);
         }
     }
 }
