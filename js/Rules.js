@@ -2,6 +2,7 @@ class Rules {
     static upperPartOfStatsTable(countedDices, column, i) {
         column[i].textContent = (i + 1) * countedDices[i + 1];
         // add bonus 
+
     }
 
     static lowerPartOfStatsTable(countedDices, column, i) {
