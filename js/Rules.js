@@ -1,10 +1,16 @@
 class Rules {
     constructor() {
-
+        this.specialRows = document.querySelectorAll(".special_row");
+        this.countFirstPlayerScore = 0;
+        this.countSecondPlayerScore = 0;
+        this._canAddFirstPlayer = true;
+        this._canAddSecondPlayer = true;
     }
-    upperPartOfStatsTable(countedDices, column, i, specialRows, playerNumber) {
-        column[i].textContent = (i + 1) * countedDices[i + 1];
 
+    upperPartOfStatsTable(countedDices, column, i, playerNumber) {
+        let scoreIntoTable = (i + 1) * countedDices[i + 1];
+        column[i].textContent = scoreIntoTable;
+        this.upperPartSpecialRows(playerNumber, scoreIntoTable);
     }
 
     lowerPartOfStatsTable(countedDices, column, i) {
@@ -87,6 +93,26 @@ class Rules {
             let counter = 0;
             countedDicesArray.forEach((element, index) => counter += (element * (index + 1)));
             column[i].textContent = counter;
+        }
+    }
+
+    upperPartSpecialRows = (playerNumber, scoreIntoTable) => {
+        if (playerNumber === 0) {
+            this.countFirstPlayerScore += scoreIntoTable;
+            if (this.countFirstPlayerScore >= 15 && this._canAddFirstPlayer) {
+                this.specialRows[0].textContent = 35;
+                this.countFirstPlayerScore += 35;
+                this._canAddFirstPlayer = false;
+            }
+            this.specialRows[2].textContent = this.countFirstPlayerScore;
+        } else if (playerNumber === 1) {
+            this.countSecondPlayerScore += scoreIntoTable;
+            if (this.countSecondPlayerScore >= 15 && this._canAddSecondPlayer) {
+                this.specialRows[1].textContent = 35;
+                this.countSecondPlayerScore += 35;
+                this._canAddSecondPlayer = false;
+            }
+            this.specialRows[3].textContent = this.countSecondPlayerScore;
         }
     }
 }

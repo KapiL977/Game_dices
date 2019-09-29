@@ -1,5 +1,6 @@
 class StatisticsTable {
     constructor() {
+        this.rules = new Rules();
         this.firstColumnCellsAfterClick = [];
         this.secondColumnCellsAfterClick = [];
         this.countedDices = '';
@@ -25,9 +26,9 @@ class StatisticsTable {
         this.countedDices = countedDices;
         if (playerNumber === 0) {
             if (i <= 5) {
-                Rules.upperPartOfStatsTable(this.countedDices, firstColumn, i);
+                this.rules.upperPartOfStatsTable(this.countedDices, firstColumn, i, playerNumber);
             } else {
-                Rules.lowerPartOfStatsTable(this.countedDices, firstColumn, i);
+                this.rules.lowerPartOfStatsTable(this.countedDices, firstColumn, i);
             }
 
             this.firstColumnCellsAfterClick.push(i);
@@ -39,9 +40,9 @@ class StatisticsTable {
 
         } else if (playerNumber === 1) {
             if (i <= 5) {
-                Rules.upperPartOfStatsTable(this.countedDices, secondColumn, i);
+                this.rules.upperPartOfStatsTable(this.countedDices, secondColumn, i, playerNumber);
             } else {
-                Rules.lowerPartOfStatsTable(this.countedDices, secondColumn, i);
+                this.rules.lowerPartOfStatsTable(this.countedDices, secondColumn, i);
             }
 
             this.secondColumnCellsAfterClick.push(i);
