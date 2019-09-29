@@ -28,7 +28,7 @@ class StatisticsTable {
             if (i <= 5) {
                 this.rules.upperPartOfStatsTable(this.countedDices, firstColumn, i, playerNumber);
             } else {
-                this.rules.lowerPartOfStatsTable(this.countedDices, firstColumn, i);
+                this.rules.lowerPartOfStatsTable(this.countedDices, firstColumn, i, playerNumber);
             }
 
             this.firstColumnCellsAfterClick.push(i);
@@ -42,7 +42,7 @@ class StatisticsTable {
             if (i <= 5) {
                 this.rules.upperPartOfStatsTable(this.countedDices, secondColumn, i, playerNumber);
             } else {
-                this.rules.lowerPartOfStatsTable(this.countedDices, secondColumn, i);
+                this.rules.lowerPartOfStatsTable(this.countedDices, secondColumn, i, playerNumber);
             }
 
             this.secondColumnCellsAfterClick.push(i);
