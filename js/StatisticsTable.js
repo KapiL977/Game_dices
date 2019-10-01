@@ -6,14 +6,7 @@ class StatisticsTable {
         this.countedDices = '';
     }
 
-    createTableSkeleton(specialRows, playersNames, playersNamesRow, firstColumn, secondColumn) {
-        for (let i = 0; i < firstColumn.length; i++) {
-            firstColumn[i].classList.toggle("active");
-            secondColumn[i].classList.toggle("active");
-        }
-
-        specialRows.forEach(row => row.classList.toggle("active"));
-
+    createTableSkeleton(playersNames, playersNamesRow) {
         let nameCell = '';
         for (let i = 0; i < playersNames.length; i++) {
             nameCell = document.createElement("th");

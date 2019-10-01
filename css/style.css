@@ -229,17 +229,6 @@ caption {
     cursor: pointer;
 }
 
-.column_1,
-.column_2,
-.special_row {
-    display: none;
-}
-
-.column_1.active,
-.column_2.active,
-.special_row.active {
-    display: table-cell;
-}
 
 /* media */
 
