@@ -9,6 +9,8 @@ class Game {
         this.numberOfThrows = document.querySelectorAll(".throw_number");
         this.showDicesArea = document.querySelector(".dices");
         this.endOfThrows = document.querySelector(".chooseOption");
+        this.gameSection = document.querySelector(".game");
+        this.statisticsSection = document.querySelector(".statistics");
         this.firstColumn = [...document.querySelectorAll(".column_1")];
         this.secondColumn = [...document.querySelectorAll(".column_2")];
 
@@ -30,11 +32,11 @@ class Game {
             "fas fa-dice-six dice"
         ];
 
-        const startGameBtn = document.querySelector(".start_game");
+        this.startGameBtn = document.querySelector(".start_game");
         this.throwDicesBtn = document.querySelector(".throw");
         this.rethrowDicesBtn = document.querySelector(".rethrow");
 
-        startGameBtn.addEventListener("click", () => this.startGame(startGameBtn));
+        this.startGameBtn.addEventListener("click", this.startGame);
         this.throwDicesBtn.addEventListener("click", this.throwDices);
         this.rethrowDicesBtn.addEventListener("click", this.rethrowDices);
 
@@ -46,8 +48,12 @@ class Game {
 
     }
 
-    startGame(startGameBtn) {
-        startGameBtn.style.display = "none";
+    startGame = () => {
+        this.startGameBtn.style.display = "none";
+        rulesOpenClose[1].style.display = "block";
+        this.gameSection.style.display = "block";
+        this.statisticsSection.style.display = "block";
+
         const numberOfPlayers = this.player.getNumberOfPlayers();
         this.playersNames = this.player.getPlayersNames(numberOfPlayers);
         console.log(numberOfPlayers, this.playersNames);
