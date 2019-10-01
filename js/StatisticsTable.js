@@ -1,16 +1,19 @@
 class StatisticsTable {
-    constructor() {
-        this.rules = new Rules();
+    constructor(specialRows) {
+        this.rules = new Rules(specialRows);
         this.firstColumnCellsAfterClick = [];
         this.secondColumnCellsAfterClick = [];
         this.countedDices = '';
+        this.playersNamesRow = '';
     }
 
     createTableSkeleton(playersNames, playersNamesRow) {
+        this.playersNamesRow = playersNamesRow;
         let nameCell = '';
         for (let i = 0; i < playersNames.length; i++) {
             nameCell = document.createElement("th");
             nameCell.textContent = playersNames[i];
+            nameCell.dataset.name = "player";
             playersNamesRow.appendChild(nameCell);
         }
     }
@@ -46,5 +49,22 @@ class StatisticsTable {
             })
 
         }
+    }
+
+    clearTableAfterLastRound(firstColumn, secondColumn) {
+        let playersCells = [...document.querySelectorAll("[data-name='player']")];
+
+        this.firstColumnCellsAfterClick = [];
+        this.secondColumnCellsAfterClick = [];
+        this.countedDices = '';
+
+        for (let i = 0; i < firstColumn.length; i++) {
+            firstColumn[i].style.pointerEvents = "auto";
+            firstColumn[i].textContent = "";
+            secondColumn[i].textContent = "";
+        }
+
+        playersCells.forEach(el => el.remove());
+        this.rules.specialRows.forEach(cell => cell.textContent = "");
     }
 }

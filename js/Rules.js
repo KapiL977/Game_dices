@@ -1,6 +1,6 @@
 class Rules {
-    constructor() {
-        this.specialRows = document.querySelectorAll(".special_row");
+    constructor(specialRows) {
+        this.specialRows = specialRows;
         this.countFirstPlayerScore = [0, 0];
         this.countSecondPlayerScore = [0, 0];
         this._canAddFirstPlayer = true;
@@ -225,4 +225,5 @@ class Rules {
             this.specialRows[7].textContent = (this.countSecondPlayerScore[0] + this.countSecondPlayerScore[1]);
         }
     }
+
 }

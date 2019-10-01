@@ -1,7 +1,8 @@
 class Game {
     constructor() {
+        this.specialRows = document.querySelectorAll(".special_row");
         this.player = new Player();
-        this.statisticsTable = new StatisticsTable();
+        this.statisticsTable = new StatisticsTable(this.specialRows);
         this.randomNumberGenerator = new RandomNumberGenerator();
         this.specialRows = document.querySelectorAll(".special_row");
         this.roundNumber = document.querySelector(".round_number");
@@ -59,7 +60,7 @@ class Game {
         console.log(numberOfPlayers, this.playersNames);
 
         const playersNamesRow = document.querySelector(".gamers_names_row");
-        this.statisticsTable.createTableSkeleton(this.specialRows, this.playersNames, playersNamesRow, this.firstColumn, this.secondColumn);
+        this.statisticsTable.createTableSkeleton(this.playersNames, playersNamesRow);
 
 
         this.roundNumber.textContent = this.round;
@@ -67,8 +68,9 @@ class Game {
     }
 
     throwDices = () => {
-        console.log(this.counter)
+        console.log(this.fiveChoseDices)
         this.fiveChoseDices = this.randomNumberGenerator.generateRandomNumbers(5);
+        console.log(this.counter, this.fiveChoseDices)
         this.counter--;
         this.throwDicesBtn.classList.toggle("disable");
         this.renderDicesInArea();
@@ -153,9 +155,11 @@ class Game {
             // console.log("y");
             this.playerNumber = 0;
             this.round++;
-            this.roundNumber.textContent = this.round;
+            if (this.round <= 13) this.roundNumber.textContent = this.round;
         }
-
+        if (this.round > 13) {
+            setTimeout(this.endGame, 2000);
+        }
         this.renderGameArea();
     }
 
@@ -177,7 +181,21 @@ class Game {
         this.fiveChoseDices = [];
     }
 
+    endGame = () => {
+        //chceck winner
+        const playersScores = [this.specialRows[6].textContent * 1, this.specialRows[7].textContent * 1];
+        const winner = playersScores[0] > playersScores[1] ? this.playersNames[0] : this.playersNames[1];
+        const points = winner === this.playersNames[0] ? playersScores[0] : playersScores[1];
 
+        //reset and show who won
+        alert(`Wygrał gracz: ${winner} i uzyskał ${points} punktów. Gratulacje!`);
+        this.startGameBtn.style.display = "block";
+        this.gameSection.style.display = "none";
+        this.statisticsSection.style.display = "none";
+        rulesOpenClose[1].style.display = "none";
+        this.round = 1;
+        this.statisticsTable.clearTableAfterLastRound(this.firstColumn, this.secondColumn);
+    }
 
 }
 
