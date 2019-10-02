@@ -12,6 +12,7 @@ class Game {
         this.endOfThrows = document.querySelector(".chooseOption");
         this.gameSection = document.querySelector(".game");
         this.statisticsSection = document.querySelector(".statistics");
+        this.startPanel = document.querySelector(".start_panel");
         this.firstColumn = [...document.querySelectorAll(".column_1")];
         this.secondColumn = [...document.querySelectorAll(".column_2")];
 
@@ -50,10 +51,7 @@ class Game {
     }
 
     startGame = () => {
-        this.startGameBtn.style.display = "none";
-        rulesOpenClose[1].style.display = "block";
-        this.gameSection.style.display = "block";
-        this.statisticsSection.style.display = "block";
+        this.startPanel.style.display = "none";
 
         const numberOfPlayers = this.player.getNumberOfPlayers();
         this.playersNames = this.player.getPlayersNames(numberOfPlayers);
@@ -193,10 +191,7 @@ class Game {
 
         //reset and show who won
         alert(`Wygrał gracz: ${winner} i uzyskał ${points} punktów. Gratulacje!`);
-        this.startGameBtn.style.display = "block";
-        this.gameSection.style.display = "none";
-        this.statisticsSection.style.display = "none";
-        rulesOpenClose[1].style.display = "none";
+        this.startPanel.style.display = "flex";
         this.round = 1;
         this.statisticsTable.clearTableAfterLastRound(this.firstColumn, this.secondColumn);
     }

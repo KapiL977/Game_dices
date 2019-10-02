@@ -12,7 +12,9 @@
 </head>
 
 <body>
-    <button class="start_game">Rozpocznij grę</button>
+    <div class="start_panel">
+        <button class="start_game">Rozpocznij grę</button>
+    </div>
     <div class="wrapper">
         <div class="informations">
             <div class="game_rules">
@@ -131,8 +133,8 @@
                 </section>
             </div>
         </div>
-        <button class="rules on_off" style="display: none;">?</button>
-        <section class="game" style="display: none;">
+        <button class="rules on_off">?</button>
+        <section class="game">
             <p class="round">Runda: <span class="round_number"></span></p>
             <p class="gamer">Gracz: <span class="gamer_name"></span></p>
             <p class="throws_number">Ilość rzutów:
@@ -145,7 +147,7 @@
             <p class="chooseOption"><strong>Skończyły się dodatkowe rzuty kości. Wybierz teraz najbardziej odpowiadającą
                     Ci opcję w tabeli statystyk.</strong></p>
         </section>
-        <section class="statistics" style="display:none;">
+        <section class="statistics">
             <table class="statistics_table">
                 <caption>Statystyki</caption>
                 <tr class="gamers_names_row">
