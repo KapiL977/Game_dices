@@ -146,21 +146,25 @@ class Game {
     }
 
     afterClickInCell(i) {
-        this.statisticsTable.addScoreToTable(this.playerNumber, this.countedDices, i, this.firstColumn, this.secondColumn);
+        if (this.showDicesArea.innerHTML === "") {
+            alert("Aby móc kliknąć w pola tabeli musisz rzucić kości!");
+        } else {
+            this.statisticsTable.addScoreToTable(this.playerNumber, this.countedDices, i, this.firstColumn, this.secondColumn);
 
-        if (this.playerNumber === 0) {
-            // console.log("x");
-            this.playerNumber = 1;
-        } else if (this.playerNumber === 1) {
-            // console.log("y");
-            this.playerNumber = 0;
-            this.round++;
-            if (this.round <= 13) this.roundNumber.textContent = this.round;
+            if (this.playerNumber === 0) {
+                // console.log("x");
+                this.playerNumber = 1;
+            } else if (this.playerNumber === 1) {
+                // console.log("y");
+                this.playerNumber = 0;
+                this.round++;
+                if (this.round <= 13) this.roundNumber.textContent = this.round;
+            }
+            if (this.round > 13) {
+                setTimeout(this.endGame, 2000);
+            }
+            this.renderGameArea();
         }
-        if (this.round > 13) {
-            setTimeout(this.endGame, 2000);
-        }
-        this.renderGameArea();
     }
 
     renderGameArea() {
@@ -182,7 +186,7 @@ class Game {
     }
 
     endGame = () => {
-        //chceck winner
+        //check winner
         const playersScores = [this.specialRows[6].textContent * 1, this.specialRows[7].textContent * 1];
         const winner = playersScores[0] > playersScores[1] ? this.playersNames[0] : this.playersNames[1];
         const points = winner === this.playersNames[0] ? playersScores[0] : playersScores[1];
