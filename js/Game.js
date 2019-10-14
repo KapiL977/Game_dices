@@ -41,13 +41,6 @@ class Game {
         this.startGameBtn.addEventListener("click", this.startGame);
         this.throwDicesBtn.addEventListener("click", this.throwDices);
         this.rethrowDicesBtn.addEventListener("click", this.rethrowDices);
-
-
-        for (let i = 0; i < this.firstColumn.length; i++) {
-            this.firstColumn[i].addEventListener("click", this.afterClickInCell.bind(this, i));
-            this.secondColumn[i].addEventListener("click", this.afterClickInCell.bind(this, i));
-        }
-
     }
 
     startGame = () => {
@@ -56,6 +49,14 @@ class Game {
         const numberOfPlayers = this.player.getNumberOfPlayers();
         this.playersNames = this.player.getPlayersNames(numberOfPlayers);
         console.log(numberOfPlayers, this.playersNames);
+
+        for (let i = 0; i < this.firstColumn.length; i++) {
+            this.firstColumn[i].addEventListener("click", this.afterClickInCell.bind(this, i));
+            if (this.playersNames[1] !== "Komputer") {
+                this.secondColumn[i].addEventListener("click", this.afterClickInCell.bind(this, i));
+            }
+        }
+
 
         const playersNamesRow = document.querySelector(".gamers_names_row");
         this.statisticsTable.createTableSkeleton(this.playersNames, playersNamesRow);
@@ -147,11 +148,11 @@ class Game {
         if (this.showDicesArea.innerHTML === "") {
             alert("Aby móc kliknąć w pola tabeli musisz rzucić kości!");
         } else {
-            this.statisticsTable.addScoreToTable(this.playerNumber, this.countedDices, i, this.firstColumn, this.secondColumn);
+            this.statisticsTable.addScoreToTable(this.playerNumber, this.countedDices, i, this.firstColumn, this.secondColumn, this.playersNames);
 
             if (this.playerNumber === 0) {
                 // console.log("x");
-                this.playerNumber = 1;
+                this.playersNames[1] !== "Komputer" ? this.playerNumber = 1 : null;
             } else if (this.playerNumber === 1) {
                 // console.log("y");
                 this.playerNumber = 0;

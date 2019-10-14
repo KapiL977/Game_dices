@@ -18,7 +18,7 @@ class StatisticsTable {
         }
     }
 
-    addScoreToTable(playerNumber, countedDices, i, firstColumn, secondColumn) {
+    addScoreToTable(playerNumber, countedDices, i, firstColumn, secondColumn, playersNames) {
         this.countedDices = countedDices;
         if (playerNumber === 0) {
             if (i <= 5) {
@@ -27,12 +27,16 @@ class StatisticsTable {
                 this.rules.lowerPartOfStatsTable(this.countedDices, firstColumn, i, playerNumber);
             }
 
-            this.firstColumnCellsAfterClick.push(i);
-            firstColumn.forEach(cell => cell.style.pointerEvents = "none");
-            secondColumn.forEach(cell => cell.style.pointerEvents = "auto");
-            this.secondColumnCellsAfterClick.forEach(cell => {
-                secondColumn[cell].style.pointerEvents = "none";
-            })
+            if (playersNames[1] !== "Komputer") {
+                this.firstColumnCellsAfterClick.push(i);
+                firstColumn.forEach(cell => cell.style.pointerEvents = "none");
+                secondColumn.forEach(cell => cell.style.pointerEvents = "auto");
+                this.secondColumnCellsAfterClick.forEach(cell => {
+                    secondColumn[cell].style.pointerEvents = "none";
+                })
+            } else {
+                firstColumn[i].style.pointerEvents = "none";
+            }
 
         } else if (playerNumber === 1) {
             if (i <= 5) {
