@@ -69,6 +69,7 @@ class Game {
 
     throwDices = () => {
         console.log(this.fiveChoseDices)
+        // move generate numbers to player.js
         this.fiveChoseDices = this.randomNumberGenerator.generateRandomNumbers(5);
         console.log(this.counter, this.fiveChoseDices)
         this.counter--;
@@ -156,7 +157,11 @@ class Game {
                 if (this.playersNames[1] !== "Komputer") {
                     this.playerNumber = 1;
                 } else {
+                    // computer panel
+                    const computerDices = this.computer.generateComputerDices();
+                    console.log(computerDices);
                     this.renderRoundNumber();
+                    //
                 }
             } else if (this.playerNumber === 1) {
                 // console.log("y");
