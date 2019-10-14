@@ -4,6 +4,7 @@ class Game {
         this.player = new Player();
         this.statisticsTable = new StatisticsTable(this.specialRows);
         this.randomNumberGenerator = new RandomNumberGenerator();
+        this.computer = new Computer();
         this.specialRows = document.querySelectorAll(".special_row");
         this.roundNumber = document.querySelector(".round_number");
         this.gamerName = document.querySelector(".gamer_name");
@@ -152,12 +153,15 @@ class Game {
 
             if (this.playerNumber === 0) {
                 // console.log("x");
-                this.playersNames[1] !== "Komputer" ? this.playerNumber = 1 : null;
+                if (this.playersNames[1] !== "Komputer") {
+                    this.playerNumber = 1;
+                } else {
+                    this.renderRoundNumber();
+                }
             } else if (this.playerNumber === 1) {
                 // console.log("y");
                 this.playerNumber = 0;
-                this.round++;
-                if (this.round <= 13) this.roundNumber.textContent = this.round;
+                this.renderRoundNumber();
             }
             if (this.round > 13) {
                 setTimeout(this.endGame, 2000);
@@ -182,6 +186,11 @@ class Game {
         this.throwDicesBtn.classList.toggle("disable");
         this.showDicesArea.innerHTML = '';
         this.fiveChoseDices = [];
+    }
+
+    renderRoundNumber() {
+        this.round++;
+        if (this.round <= 13) this.roundNumber.textContent = this.round;
     }
 
     endGame = () => {
