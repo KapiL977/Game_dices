@@ -4,7 +4,7 @@ class Game {
         this.player = new Player();
         this.statisticsTable = new StatisticsTable(this.specialRows);
         this.randomNumberGenerator = new RandomNumberGenerator();
-        this.computer = new Computer();
+        this.computer = new Computer(this.specialRows);
         this.specialRows = document.querySelectorAll(".special_row");
         this.roundNumber = document.querySelector(".round_number");
         this.gamerName = document.querySelector(".gamer_name");
@@ -159,7 +159,9 @@ class Game {
                 } else {
                     // computer panel
                     const computerDices = this.computer.generateComputerDices();
-                    console.log(computerDices);
+                    const countedComputerDices = this.countNumberOfDices(computerDices);
+                    this.computer.chooseTheBestOption(countedComputerDices, this.secondColumn);
+                    // console.log(computerDices, countedComputerDices);
                     this.renderRoundNumber();
                     //
                 }
