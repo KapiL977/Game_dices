@@ -3,6 +3,7 @@ class Rules {
         this.specialRows = specialRows;
         this.countFirstPlayerScore = [0, 0];
         this.countSecondPlayerScore = [0, 0];
+        this.countComputer = 0;
         this._canAddFirstPlayer = true;
         this._canAddSecondPlayer = true;
     }
@@ -188,6 +189,7 @@ class Rules {
             return counter;
         }
     }
+
     upperPartSpecialRows = (playerNumber, scoreIntoTable) => {
         if (playerNumber === 0) {
             this.countFirstPlayerScore[0] += scoreIntoTable;
@@ -213,6 +215,8 @@ class Rules {
             this.specialRows[4].textContent = this.countFirstPlayerScore[1];
         } else if (playerNumber === 1) {
             this.specialRows[5].textContent = this.countSecondPlayerScore[1];
+        } else if (playerNumber === 2) {
+            this.specialRows[5].textContent = this.countComputer;
         }
     }
 
@@ -221,6 +225,8 @@ class Rules {
             this.specialRows[6].textContent = (this.countFirstPlayerScore[0] + this.countFirstPlayerScore[1]);
         } else if (playerNumber === 1) {
             this.specialRows[7].textContent = (this.countSecondPlayerScore[0] + this.countSecondPlayerScore[1]);
+        } else if (playerNumber === 2) {
+            this.specialRows[7].textContent = (this.countComputer + this.countSecondPlayerScore[0]);
         }
     }
 
