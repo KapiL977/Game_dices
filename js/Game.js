@@ -34,6 +34,7 @@ class Game {
             "fas fa-dice-five dice",
             "fas fa-dice-six dice"
         ];
+        this.canAdd = true;
 
         this.startGameBtn = document.querySelector(".start_game");
         this.throwDicesBtn = document.querySelector(".throw");
@@ -51,14 +52,16 @@ class Game {
         this.playersNames = this.player.getPlayersNames(numberOfPlayers);
         // console.log(numberOfPlayers, this.playersNames);
 
-        for (let i = 0; i < this.firstColumn.length; i++) {
-            this.firstColumn[i].addEventListener("click", this.afterClickInCell.bind(this, i));
-            if (this.playersNames[1] !== "Komputer") {
-                this.secondColumn[i].addEventListener("click", this.afterClickInCell.bind(this, i));
+        if (this.canAdd) {
+            for (let i = 0; i < this.firstColumn.length; i++) {
+                this.firstColumn[i].addEventListener("click", this.afterClickInCell.bind(this, i));
+                if (this.playersNames[1] !== "Komputer") {
+                    this.secondColumn[i].addEventListener("click", this.afterClickInCell.bind(this, i));
+                }
             }
         }
 
-
+        this.canAdd = false;
         const playersNamesRow = document.querySelector(".gamers_names_row");
         this.statisticsTable.createTableSkeleton(this.playersNames, playersNamesRow);
 
