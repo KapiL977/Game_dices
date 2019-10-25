@@ -49,7 +49,7 @@ class Game {
 
         const numberOfPlayers = this.player.getNumberOfPlayers();
         this.playersNames = this.player.getPlayersNames(numberOfPlayers);
-        console.log(numberOfPlayers, this.playersNames);
+        // console.log(numberOfPlayers, this.playersNames);
 
         for (let i = 0; i < this.firstColumn.length; i++) {
             this.firstColumn[i].addEventListener("click", this.afterClickInCell.bind(this, i));
@@ -68,10 +68,10 @@ class Game {
     }
 
     throwDices = () => {
-        console.log(this.fiveChoseDices)
+        // console.log(this.fiveChoseDices)
         // move generate numbers to player.js
         this.fiveChoseDices = this.randomNumberGenerator.generateRandomNumbers(5);
-        console.log(this.counter, this.fiveChoseDices)
+        // console.log(this.counter, this.fiveChoseDices)
         this.counter--;
         this.throwDicesBtn.classList.toggle("disable");
         this.renderDicesInArea();
@@ -160,7 +160,7 @@ class Game {
                     // computer panel
                     const computerDices = this.computer.generateComputerDices();
                     const countedComputerDices = this.countNumberOfDices(computerDices);
-                    this.computer.chooseTheBestOption(countedComputerDices, this.secondColumn);
+                    this.computer.chooseTheBestOption(countedComputerDices, this.secondColumn, this.round);
                     // console.log(computerDices, countedComputerDices);
                     this.renderRoundNumber();
                     //
