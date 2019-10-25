@@ -4,8 +4,7 @@ class Rules {
         this.countFirstPlayerScore = [0, 0];
         this.countSecondPlayerScore = [0, 0];
         this.countComputer = 0;
-        this._canAddFirstPlayer = true;
-        this._canAddSecondPlayer = true;
+        this._canAddRules = [true, true];
     }
 
     upperPartOfStatsTable(countedDices, column, i, playerNumber) {
@@ -193,18 +192,18 @@ class Rules {
     upperPartSpecialRows = (playerNumber, scoreIntoTable) => {
         if (playerNumber === 0) {
             this.countFirstPlayerScore[0] += scoreIntoTable;
-            if (this.countFirstPlayerScore[0] >= 63 && this._canAddFirstPlayer) {
+            if (this.countFirstPlayerScore[0] >= 63 && this._canAddRules[0]) {
                 this.specialRows[0].textContent = 35;
                 this.countFirstPlayerScore[0] += 35;
-                this._canAddFirstPlayer = false;
+                this._canAddRules[0] = false;
             }
             this.specialRows[2].textContent = this.countFirstPlayerScore[0];
         } else if (playerNumber === 1) {
             this.countSecondPlayerScore[0] += scoreIntoTable;
-            if (this.countSecondPlayerScore[0] >= 63 && this._canAddSecondPlayer) {
+            if (this.countSecondPlayerScore[0] >= 63 && this._canAddRules[1]) {
                 this.specialRows[1].textContent = 35;
                 this.countSecondPlayerScore[0] += 35;
-                this._canAddSecondPlayer = false;
+                this._canAddRules[1] = false;
             }
             this.specialRows[3].textContent = this.countSecondPlayerScore[0];
         }
