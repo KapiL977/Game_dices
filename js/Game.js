@@ -46,28 +46,31 @@ class Game {
     }
 
     startGame = () => {
-        this.startPanel.style.display = "none";
+        const trulyStart = confirm("Czy na pewno chcesz rozpocząć grę?");
+        if (trulyStart) {
+            this.startPanel.style.display = "none";
 
-        const numberOfPlayers = this.player.getNumberOfPlayers();
-        this.playersNames = this.player.getPlayersNames(numberOfPlayers);
-        // console.log(numberOfPlayers, this.playersNames);
+            const numberOfPlayers = this.player.getNumberOfPlayers();
+            this.playersNames = this.player.getPlayersNames(numberOfPlayers);
+            console.log(numberOfPlayers, this.playersNames);
 
-        if (this.canAdd) {
-            for (let i = 0; i < this.firstColumn.length; i++) {
-                this.firstColumn[i].addEventListener("click", this.afterClickInCell.bind(this, i));
-                if (this.playersNames[1] !== "Komputer") {
-                    this.secondColumn[i].addEventListener("click", this.afterClickInCell.bind(this, i));
+            if (this.canAdd) {
+                for (let i = 0; i < this.firstColumn.length; i++) {
+                    this.firstColumn[i].addEventListener("click", this.afterClickInCell.bind(this, i));
+                    if (this.playersNames[1] !== "Komputer") {
+                        this.secondColumn[i].addEventListener("click", this.afterClickInCell.bind(this, i));
+                    }
                 }
             }
+
+            this.canAdd = false;
+            const playersNamesRow = document.querySelector(".gamers_names_row");
+            this.statisticsTable.createTableSkeleton(this.playersNames, playersNamesRow);
+
+
+            this.roundNumber.textContent = this.round;
+            this.gamerName.textContent = this.playersNames[this.playerNumber];
         }
-
-        this.canAdd = false;
-        const playersNamesRow = document.querySelector(".gamers_names_row");
-        this.statisticsTable.createTableSkeleton(this.playersNames, playersNamesRow);
-
-
-        this.roundNumber.textContent = this.round;
-        this.gamerName.textContent = this.playersNames[this.playerNumber];
     }
 
     throwDices = () => {
