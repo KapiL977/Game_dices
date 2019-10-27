@@ -56,15 +56,13 @@ class Game {
 
             const numberOfPlayers = this.player.getNumberOfPlayers();
             this.playersNames = this.player.getPlayersNames(numberOfPlayers);
-            console.log(numberOfPlayers, this.playersNames);
 
             if (numberOfPlayers === 2) {
-                while (this.playersNames[0] === this.playersNames[1]) {
+                while (this.playersNames[0] === this.playersNames[1] || this.playersNames[1] === "Komputer") {
                     alert("Musiałeś podać dwa razy taką samą nazwę zawodnika! Nazwy zawodników nie mogą się powtarzać. Podaj je jeszcze raz.");
                     this.playersNames = this.player.getPlayersNames(numberOfPlayers);
                 }
             }
-
             const playersNamesRow = document.querySelector(".gamers_names_row");
             this.statisticsTable.createTableSkeleton(this.playersNames, playersNamesRow);
 
