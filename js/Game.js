@@ -167,7 +167,7 @@ class Game {
                     // computer panel
                     const computerDices = this.computer.generateComputerDices();
                     const countedComputerDices = this.countNumberOfDices(computerDices);
-                    this.computer.chooseTheBestOption(countedComputerDices, this.secondColumn, this.round);
+                    this.computer.chooseTheBestOption(countedComputerDices, this.secondColumn);
                     // console.log(computerDices, countedComputerDices);
                     this.renderRoundNumber();
                     //
@@ -177,8 +177,10 @@ class Game {
                 this.playerNumber = 0;
                 this.renderRoundNumber();
             }
+
             if (this.round > 13) {
                 setTimeout(this.endGame, 2000);
+                this.computer.clearUsedIndex();
             }
             this.renderGameArea();
         }
