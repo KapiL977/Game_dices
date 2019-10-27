@@ -213,11 +213,17 @@ class Game {
         //check winner
         const playersScores = [this.specialRows[6].textContent * 1, this.specialRows[7].textContent * 1];
         const winner = playersScores[0] > playersScores[1] ? this.playersNames[0] : this.playersNames[1];
+        const draw = (playersScores[0] === playersScores[1]);
         const points = winner === this.playersNames[0] ? playersScores[0] : playersScores[1];
 
         //reset and show who won
-        alert(`Wygrał gracz: ${winner} i uzyskał ${points} punktów. Gratulacje!`);
-        this.startPanel.style.display = "flex";
+        if (!draw) {
+            alert(`Wygrał gracz: ${winner} i uzyskał ${points} punktów. Gratulacje!`);
+            this.startPanel.style.display = "flex";
+        } else {
+            alert("W grze wystąpił remis! Gratulacje dla obydwu graczy!");
+        }
+
         this.round = 1;
         this.statisticsTable.clearTableAfterLastRound(this.firstColumn, this.secondColumn);
     }
