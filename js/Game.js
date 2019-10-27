@@ -54,6 +54,13 @@ class Game {
             this.playersNames = this.player.getPlayersNames(numberOfPlayers);
             console.log(numberOfPlayers, this.playersNames);
 
+            if (numberOfPlayers === 2) {
+                while (this.playersNames[0] === this.playersNames[1]) {
+                    alert("Musiałeś podać dwa razy taką samą nazwę zawodnika! Nazwy zawodników nie mogą się powtarzać. Podaj je jeszcze raz.");
+                    this.playersNames = this.player.getPlayersNames(numberOfPlayers);
+                }
+            }
+
             if (this.canAdd) {
                 for (let i = 0; i < this.firstColumn.length; i++) {
                     this.firstColumn[i].addEventListener("click", this.afterClickInCell.bind(this, i));
