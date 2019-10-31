@@ -16,9 +16,7 @@ class Player {
             }
             playersNames.push(playerName);
         }
-
         numberOfPlayers === 1 ? playersNames.push("Komputer") : null;
-
         return playersNames;
     }
 
@@ -29,8 +27,8 @@ class Player {
                 if (dice.classList.toggle("active")) {
                     dicesToRethrow.push(diceIndex);
                 } else {
-                    dicesToRethrow.forEach((el, i) => {
-                        if (el === diceIndex) dicesToRethrow.splice(i, 1);
+                    dicesToRethrow.forEach((element, i) => {
+                        if (element === diceIndex) dicesToRethrow.splice(i, 1);
                     })
                 }
             })
