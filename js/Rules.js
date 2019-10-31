@@ -4,23 +4,19 @@ class Rules {
         this.countFirstPlayerScore = [0, 0];
         this.countSecondPlayerScore = [0, 0];
         this.countComputer = 0;
-        this.one = 0;
-        this.two = 0;
+        this.firstPlayerClick = 0;
+        this.secondPlayerClick = 0;
         this._canAddRules = [true, true];
     }
 
     upperPartOfStatsTable(countedDices, column, i, playerNumber) {
         const scoreIntoTable = this.upperPartsCountScore(i, countedDices);
-
         column[i].textContent = scoreIntoTable;
-
         this.upperPartSpecialRows(playerNumber, scoreIntoTable);
         this.showFinalResult(playerNumber);
-
         this.clearRules(playerNumber);
     }
 
-    // remove from upperPartsOfTable
     upperPartsCountScore(i, countedDices) {
         let scoreIntoTable = (i + 1) * countedDices[i + 1];
         return scoreIntoTable;
@@ -31,16 +27,12 @@ class Rules {
         const countedDicesArray = Object.values(countedDices);
         const arrayLength = countedDicesArray.length;
         const score = this.lowerPartsCountScore(i, arrayLength, countedDicesArray, points, playerNumber);
-
         column[i].textContent = score;
-
         this.lowerPartSpecialRow(playerNumber);
         this.showFinalResult(playerNumber);
-
         this.clearRules(playerNumber);
     }
 
-    //remove from lowerParttOfTable
     lowerPartsCountScore(i, arrayLength, countedDicesArray, points, playerNumber) {
         if (i === 6) {
             for (let j = 0; j < arrayLength; j++) {
@@ -236,19 +228,18 @@ class Rules {
 
     clearRules(playerNumber) {
         if (playerNumber === 1) {
-            this.one++;
-        } else if (playerNumber === 0 && this.one === 0) {
-            this.two++;
+            this.firstPlayerClick++;
+        } else if (playerNumber === 0 && this.firstPlayerClick === 0) {
+            this.secondPlayerClick++;
         }
-
         // clear
-        if (this.one === 13 || this.two === 13) {
+        if (this.firstPlayerClick === 13 || this.secondPlayerClick === 13) {
             this._canAddRules = [true, true];
             this.countFirstPlayerScore = [0, 0];
             this.countSecondPlayerScore = [0, 0];
             this.countComputer = 0;
-            this.one = 0;
-            this.two = 0;
+            this.firstPlayerClick = 0;
+            this.secondPlayerClick = 0;
         }
     }
 }
