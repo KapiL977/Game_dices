@@ -22,13 +22,11 @@ class StatisticsTable {
         this.countedDices = countedDices;
         if (playerNumber === 0) {
             this.addToRulesClass(i, firstColumn, playerNumber);
-
             if (playersNames[1] !== "Komputer") {
                 this.changeColumn(i, firstColumn, secondColumn, this.firstColumnCellsAfterClick, this.secondColumnCellsAfterClick);
             } else {
                 firstColumn[i].style.pointerEvents = "none";
             }
-
         } else if (playerNumber === 1) {
             this.addToRulesClass(i, secondColumn, playerNumber);
             this.changeColumn(i, secondColumn, firstColumn, this.secondColumnCellsAfterClick, this.firstColumnCellsAfterClick);
@@ -54,17 +52,14 @@ class StatisticsTable {
 
     clearTableAfterLastRound(firstColumn, secondColumn) {
         let playersCells = [...document.querySelectorAll("[data-name='player']")];
-
         this.firstColumnCellsAfterClick = [];
         this.secondColumnCellsAfterClick = [];
         this.countedDices = '';
-
         for (let i = 0; i < firstColumn.length; i++) {
             firstColumn[i].style.pointerEvents = "auto";
             firstColumn[i].textContent = "";
             secondColumn[i].textContent = "";
         }
-
         playersCells.forEach(el => el.remove());
         this.rules.specialRows.forEach(cell => cell.textContent = "");
     }
