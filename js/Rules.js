@@ -197,21 +197,20 @@ class Rules {
 
     upperPartSpecialRows = (playerNumber, scoreIntoTable) => {
         if (playerNumber === 0) {
-            this.countFirstPlayerScore[0] += scoreIntoTable;
-            if (this.countFirstPlayerScore[0] >= 63 && this._canAddRules[0]) {
-                this.specialRows[0].textContent = 35;
-                this.countFirstPlayerScore[0] += 35;
-                this._canAddRules[0] = false;
-            }
+            this.upperPartSpecialRowsAddScore(this.countFirstPlayerScore, scoreIntoTable, 0, 0);
             this.specialRows[2].textContent = this.countFirstPlayerScore[0];
         } else if (playerNumber === 1) {
-            this.countSecondPlayerScore[0] += scoreIntoTable;
-            if (this.countSecondPlayerScore[0] >= 63 && this._canAddRules[1]) {
-                this.specialRows[1].textContent = 35;
-                this.countSecondPlayerScore[0] += 35;
-                this._canAddRules[1] = false;
-            }
+            this.upperPartSpecialRowsAddScore(this.countSecondPlayerScore, scoreIntoTable, 0, 1)
             this.specialRows[3].textContent = this.countSecondPlayerScore[0];
+        }
+    }
+
+    upperPartSpecialRowsAddScore(playerCount, scoreIntoTable, iFirst, iSecond) {
+        playerCount[iFirst] += scoreIntoTable;
+        if (playerCount[iFirst] >= 10 && this._canAddRules[iSecond]) {
+            this.specialRows[iSecond].textContent = 35;
+            playerCount[iFirst] += 35;
+            this._canAddRules[iSecond] = false;
         }
     }
 
@@ -234,7 +233,6 @@ class Rules {
             this.specialRows[7].textContent = (this.countComputer + this.countSecondPlayerScore[0]);
         }
     }
-
 
     clearRules(playerNumber) {
         if (playerNumber === 1) {

@@ -23,6 +23,24 @@ button {
     cursor: pointer;
 }
 
+/* .start_panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: cadetblue;
+    z-index: 2;
+}
+
+.start_game {
+    font-size: 50px;
+    padding: 80px 100px;
+} */
+
 /* information window */
 
 .informations {
