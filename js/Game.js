@@ -1,10 +1,12 @@
 class Game {
     constructor() {
+        this.gameVariables();
+        this.gameLogicInConstructor();
+    }
+
+    gameVariables() {
+        //from html
         this.specialRows = document.querySelectorAll(".special_row");
-        this.player = new Player();
-        this.statisticsTable = new StatisticsTable(this.specialRows);
-        this.randomNumberGenerator = new RandomNumberGenerator();
-        this.computer = new Computer(this.specialRows);
         this.specialRows = document.querySelectorAll(".special_row");
         this.roundNumber = document.querySelector(".round_number");
         this.gamerName = document.querySelector(".gamer_name");
@@ -16,10 +18,17 @@ class Game {
         this.startPanel = document.querySelector(".start_panel");
         this.firstColumn = [...document.querySelectorAll(".column_1")];
         this.secondColumn = [...document.querySelectorAll(".column_2")];
+        this.startGameBtn = document.querySelector(".start_game");
+        this.throwDicesBtn = document.querySelector(".throw");
+        this.rethrowDicesBtn = document.querySelector(".rethrow");
 
+        //instance of a class
+        this.player = new Player();
+        this.statisticsTable = new StatisticsTable(this.specialRows);
+        this.randomNumberGenerator = new RandomNumberGenerator();
+        this.computer = new Computer(this.specialRows);
 
-        this.secondColumn.forEach(cell => cell.style.pointerEvents = "none");
-
+        //own variables
         this.playersNames = [];
         this.countedDices = '';
         this.counter = 3;
@@ -27,23 +36,25 @@ class Game {
         this.round = 1;
         this.dicesToRethrow = 0;
         this.fiveChoseDices = [];
-        this.dicesClasses = ["fas fa-dice-one dice",
+        this.dicesClasses = [
+            "fas fa-dice-one dice",
             "fas fa-dice-two dice",
             "fas fa-dice-three dice",
             "fas fa-dice-four dice",
             "fas fa-dice-five dice",
             "fas fa-dice-six dice"
         ];
+    }
 
+    gameLogicInConstructor() {
+        //disable click in second column cells
+        this.secondColumn.forEach(cell => cell.style.pointerEvents = "none");
+        //click in cells
         for (let i = 0; i < this.firstColumn.length; i++) {
             this.firstColumn[i].addEventListener("click", this.afterClickInCell.bind(this, i));
             this.secondColumn[i].addEventListener("click", this.afterClickInCell.bind(this, i));
         }
-
-        this.startGameBtn = document.querySelector(".start_game");
-        this.throwDicesBtn = document.querySelector(".throw");
-        this.rethrowDicesBtn = document.querySelector(".rethrow");
-
+        //click in main buttons
         this.startGameBtn.addEventListener("click", this.startGame);
         this.throwDicesBtn.addEventListener("click", this.throwDices);
         this.rethrowDicesBtn.addEventListener("click", this.rethrowDices);
