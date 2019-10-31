@@ -4,6 +4,8 @@ class Rules {
         this.countFirstPlayerScore = [0, 0];
         this.countSecondPlayerScore = [0, 0];
         this.countComputer = 0;
+        this.one = 0;
+        this.two = 0;
         this._canAddRules = [true, true];
     }
 
@@ -14,6 +16,8 @@ class Rules {
 
         this.upperPartSpecialRows(playerNumber, scoreIntoTable);
         this.showFinalResult(playerNumber);
+
+        this.clearRules(playerNumber);
     }
 
     // remove from upperPartsOfTable
@@ -32,6 +36,8 @@ class Rules {
 
         this.lowerPartSpecialRow(playerNumber);
         this.showFinalResult(playerNumber);
+
+        this.clearRules(playerNumber);
     }
 
     //remove from lowerParttOfTable
@@ -229,4 +235,22 @@ class Rules {
         }
     }
 
+
+    clearRules(playerNumber) {
+        if (playerNumber === 1) {
+            this.one++;
+        } else if (playerNumber === 0 && this.one === 0) {
+            this.two++;
+        }
+
+        // clear
+        if (this.one === 13 || this.two === 13) {
+            this._canAddRules = [true, true];
+            this.countFirstPlayerScore = [0, 0];
+            this.countSecondPlayerScore = [0, 0];
+            this.countComputer = 0;
+            this.one = 0;
+            this.two = 0;
+        }
+    }
 }

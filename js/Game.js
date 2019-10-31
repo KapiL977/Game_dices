@@ -165,8 +165,7 @@ class Game {
                     // computer panel
                     const computerDices = this.computer.generateComputerDices();
                     const countedComputerDices = this.countNumberOfDices(computerDices);
-                    this.computer.chooseTheBestOption(countedComputerDices, this.secondColumn);
-                    // console.log(computerDices, countedComputerDices);
+                    this.computer.chooseTheBestOption(countedComputerDices, this.secondColumn, this.round);
                     this.renderRoundNumber();
                     //
                 }

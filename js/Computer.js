@@ -12,12 +12,13 @@ class Computer {
         return this.computerFiveNumbers;
     }
 
-    chooseTheBestOption(countedDices, secondColumn) {
+    chooseTheBestOption(countedDices, secondColumn, round) {
         this.computerCountDices = countedDices;
         const compCountDicesArray = Object.values(this.computerCountDices);
         const arrayLength = compCountDicesArray.length;
         const scores = this.fillScoresTable(compCountDicesArray, arrayLength, secondColumn);
         this.chooseScore(scores, secondColumn);
+        this.clearComputerCount(round)
     }
 
     fillScoresTable(compDicesArray, arrayLength, column) {
@@ -63,5 +64,13 @@ class Computer {
 
     clearUsedIndex() {
         this.usedIndex = [];
+    }
+
+    clearComputerCount(round) {
+        if (round === 13) {
+            this.rules.countComputer = 0;
+            this.rules.countSecondPlayerScore[0] = 0;
+            this.rules._canAddRules[1] = true;
+        }
     }
 }
