@@ -207,7 +207,7 @@ class Rules {
 
     upperPartSpecialRowsAddScore(playerCount, scoreIntoTable, iFirst, iSecond) {
         playerCount[iFirst] += scoreIntoTable;
-        if (playerCount[iFirst] >= 10 && this._canAddRules[iSecond]) {
+        if (playerCount[iFirst] >= 63 && this._canAddRules[iSecond]) {
             this.specialRows[iSecond].textContent = 35;
             playerCount[iFirst] += 35;
             this._canAddRules[iSecond] = false;
