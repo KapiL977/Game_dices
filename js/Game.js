@@ -21,13 +21,11 @@ class Game {
         this.startGameBtn = document.querySelector(".start_game");
         this.throwDicesBtn = document.querySelector(".throw");
         this.rethrowDicesBtn = document.querySelector(".rethrow");
-
         //instance of a class
         this.player = new Player();
         this.statisticsTable = new StatisticsTable(this.specialRows);
         this.randomNumberGenerator = new RandomNumberGenerator();
         this.computer = new Computer(this.specialRows);
-
         //own variables
         this.playersNames = [];
         this.countedDices = '';
@@ -64,10 +62,8 @@ class Game {
         const trulyStart = confirm("Czy na pewno chcesz rozpocząć grę?");
         if (trulyStart) {
             this.startPanel.style.display = "none";
-
             const numberOfPlayers = this.player.getNumberOfPlayers();
             this.playersNames = this.player.getPlayersNames(numberOfPlayers);
-
             if (numberOfPlayers === 2) {
                 while (this.playersNames[0] === this.playersNames[1] || this.playersNames[1] === "Komputer") {
                     alert("Musiałeś podać dwa razy taką samą nazwę zawodnika! Nazwy zawodników nie mogą się powtarzać. Podaj je jeszcze raz.");
@@ -76,30 +72,23 @@ class Game {
             }
             const playersNamesRow = document.querySelector(".gamers_names_row");
             this.statisticsTable.createTableSkeleton(this.playersNames, playersNamesRow);
-
-
             this.roundNumber.textContent = this.round;
             this.gamerName.textContent = this.playersNames[this.playerNumber];
         }
     }
 
     throwDices = () => {
-        // console.log(this.fiveChoseDices)
-        // move generate numbers to player.js
         this.fiveChoseDices = this.randomNumberGenerator.generateRandomNumbers(5);
-        // console.log(this.counter, this.fiveChoseDices)
         this.counter--;
         this.throwDicesBtn.classList.toggle("disable");
         this.renderDicesInArea();
         this.giveOptionToChooseDices();
         this.rethrowDicesBtn.classList.toggle("disable");
         this.numberOfThrows[this.counter].classList.toggle("active");
-
         this.countedDices = this.countNumberOfDices(this.fiveChoseDices);
     }
 
     rethrowDices = () => {
-        console.log(this.playerNumber);
         if (this.dicesToRethrow.length === 0) {
             alert("Musisz wybrać jakieś kości do przerzucenia! \nJeśli nie chcesz przerzucać żadnych kości - kliknij w jedną z kategorii w tabeli statystyk by zakończyć rundę.");
         } else {
@@ -107,11 +96,9 @@ class Game {
             this.dicesToRethrow = this.dicesToRethrow.sort((lower, bigger) => lower - bigger);
             const toRethrowLength = this.dicesToRethrow.length;
             const newDicesAfterRethrow = this.randomNumberGenerator.generateRandomNumbers(toRethrowLength);
-
             for (let i = 0; i < toRethrowLength; i++) {
                 this.fiveChoseDices.splice(this.dicesToRethrow[i], 1, newDicesAfterRethrow[i]);
             }
-
             this.showDicesArea.innerHTML = '';
             this.renderDicesInArea();
             this.giveOptionToChooseDices();
@@ -119,7 +106,6 @@ class Game {
             this.canThrowDices(this.counter, this.rethrowDicesBtn);
             this.countedDices = this.countNumberOfDices(this.fiveChoseDices);
         }
-
     }
 
     renderDicesInArea() {
@@ -167,9 +153,7 @@ class Game {
             alert("Aby móc kliknąć w pola tabeli musisz rzucić kości!");
         } else {
             this.statisticsTable.addScoreToTable(this.playerNumber, this.countedDices, i, this.firstColumn, this.secondColumn, this.playersNames);
-
             if (this.playerNumber === 0) {
-                // console.log("x");
                 if (this.playersNames[1] !== "Komputer") {
                     this.playerNumber = 1;
                 } else {
@@ -181,15 +165,11 @@ class Game {
                     //
                 }
             } else if (this.playerNumber === 1) {
-                // console.log("y");
                 this.playerNumber = 0;
                 this.renderRoundNumber();
             }
 
-            if (this.round > 13) {
-                setTimeout(this.endGame, 2000);
-                this.computer.clearUsedIndex();
-            }
+            this.showEndGame();
             this.renderGameArea();
         }
     }
@@ -223,7 +203,6 @@ class Game {
         const winner = playersScores[0] > playersScores[1] ? this.playersNames[0] : this.playersNames[1];
         const draw = (playersScores[0] === playersScores[1]);
         const points = winner === this.playersNames[0] ? playersScores[0] : playersScores[1];
-
         //reset and show who won
         if (!draw) {
             alert(`Wygrał gracz: ${winner} i uzyskał ${points} punktów. Gratulacje!`);
@@ -231,11 +210,17 @@ class Game {
         } else {
             alert("W grze wystąpił remis! Gratulacje dla obydwu graczy!");
         }
-
+        //clear round and statistics table
         this.round = 1;
         this.statisticsTable.clearTableAfterLastRound(this.firstColumn, this.secondColumn);
     }
 
+    showEndGame() {
+        if (this.round > 13) {
+            setTimeout(this.endGame, 2000);
+            this.computer.clearUsedIndex();
+        }
+    }
 }
 
 const game = new Game();
