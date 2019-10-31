@@ -21,38 +21,35 @@ class StatisticsTable {
     addScoreToTable(playerNumber, countedDices, i, firstColumn, secondColumn, playersNames) {
         this.countedDices = countedDices;
         if (playerNumber === 0) {
-            if (i <= 5) {
-                this.rules.upperPartOfStatsTable(this.countedDices, firstColumn, i, playerNumber);
-            } else {
-                this.rules.lowerPartOfStatsTable(this.countedDices, firstColumn, i, playerNumber);
-            }
+            this.addToRulesClass(i, firstColumn, playerNumber);
 
             if (playersNames[1] !== "Komputer") {
-                this.firstColumnCellsAfterClick.push(i);
-                firstColumn.forEach(cell => cell.style.pointerEvents = "none");
-                secondColumn.forEach(cell => cell.style.pointerEvents = "auto");
-                this.secondColumnCellsAfterClick.forEach(cell => {
-                    secondColumn[cell].style.pointerEvents = "none";
-                })
+                this.changeColumn(i, firstColumn, secondColumn, this.firstColumnCellsAfterClick, this.secondColumnCellsAfterClick);
             } else {
                 firstColumn[i].style.pointerEvents = "none";
             }
 
         } else if (playerNumber === 1) {
-            if (i <= 5) {
-                this.rules.upperPartOfStatsTable(this.countedDices, secondColumn, i, playerNumber);
-            } else {
-                this.rules.lowerPartOfStatsTable(this.countedDices, secondColumn, i, playerNumber);
-            }
-
-            this.secondColumnCellsAfterClick.push(i);
-            secondColumn.forEach(cell => cell.style.pointerEvents = "none");
-            firstColumn.forEach(cell => cell.style.pointerEvents = "auto");
-            this.firstColumnCellsAfterClick.forEach(cell => {
-                firstColumn[cell].style.pointerEvents = "none";
-            })
-
+            this.addToRulesClass(i, secondColumn, playerNumber);
+            this.changeColumn(i, secondColumn, firstColumn, this.secondColumnCellsAfterClick, this.firstColumnCellsAfterClick);
         }
+    }
+
+    addToRulesClass(i, column, playerNumber) {
+        if (i <= 5) {
+            this.rules.upperPartOfStatsTable(this.countedDices, column, i, playerNumber);
+        } else {
+            this.rules.lowerPartOfStatsTable(this.countedDices, column, i, playerNumber);
+        }
+    }
+
+    changeColumn(i, columnNone, columnChange, addArray, whichBlock) {
+        addArray.push(i);
+        columnNone.forEach(cell => cell.style.pointerEvents = "none");
+        columnChange.forEach(cell => cell.style.pointerEvents = "auto");
+        whichBlock.forEach(cell => {
+            columnChange[cell].style.pointerEvents = "none";
+        })
     }
 
     clearTableAfterLastRound(firstColumn, secondColumn) {
