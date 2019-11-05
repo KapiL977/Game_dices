@@ -99,7 +99,6 @@ class Game {
             for (let i = 0; i < toRethrowLength; i++) {
                 this.fiveChoseDices.splice(this.dicesToRethrow[i], 1, newDicesAfterRethrow[i]);
             }
-            this.showDicesArea.innerHTML = '';
             this.renderDicesInArea();
             this.giveOptionToChooseDices();
             this.numberOfThrows[this.counter].classList.toggle("active");
@@ -109,6 +108,7 @@ class Game {
     }
 
     renderDicesInArea() {
+        this.showDicesArea.innerHTML = '';
         let diceElement = '';
         for (let i = 0; i < this.fiveChoseDices.length; i++) {
             diceElement = document.createElement("i");
