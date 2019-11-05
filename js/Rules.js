@@ -17,24 +17,32 @@ class Rules {
         this.clearRules(playerNumber);
     }
 
-    upperPartsCountScore(i, countedDices) {
-        let scoreIntoTable = (i + 1) * countedDices[i + 1];
+    upperPartsCountScore(statIndex, countedDices) {
+        let scoreIntoTable = (statIndex + 1) * countedDices[statIndex + 1];
         return scoreIntoTable;
     }
 
-    lowerPartOfStatsTable(countedDices, column, i, playerNumber) {
+    lowerPartOfStatsTable(countedDices, column, statIndex, playerNumber) {
         let points = 0;
         const countedDicesArray = Object.values(countedDices);
         const arrayLength = countedDicesArray.length;
-        const score = this.lowerPartsCountScore(i, arrayLength, countedDicesArray, points, playerNumber);
-        column[i].textContent = score;
+        const score = this.lowerPartsCountScore(statIndex, arrayLength, countedDicesArray, points, playerNumber);
+        column[statIndex].textContent = score;
         this.lowerPartSpecialRow(playerNumber);
         this.showFinalResult(playerNumber);
         this.clearRules(playerNumber);
     }
 
-    lowerPartsCountScore(i, arrayLength, countedDicesArray, points, playerNumber) {
-        if (i === 6) {
+    addScoreToCell(playerNumber, points) {
+        if (playerNumber === 0) {
+            this.countFirstPlayerScore[1] += points;
+        } else if (playerNumber === 1) {
+            this.countSecondPlayerScore[1] += points;
+        }
+    }
+
+    lowerPartsCountScore(statIndex, arrayLength, countedDicesArray, points, playerNumber) {
+        if (statIndex === 6) {
             for (let j = 0; j < arrayLength; j++) {
                 if (countedDicesArray[j] >= 3) {
                     for (let k = 0; k < arrayLength; k++) {
@@ -42,14 +50,9 @@ class Rules {
                     }
                 }
             }
-            //add score to special row
-            if (playerNumber === 0) {
-                this.countFirstPlayerScore[1] += points;
-            } else if (playerNumber === 1) {
-                this.countSecondPlayerScore[1] += points;
-            }
+            this.addScoreToCell(playerNumber, points);
             return points;
-        } else if (i === 7) {
+        } else if (statIndex === 7) {
             for (let j = 0; j < arrayLength; j++) {
                 if (countedDicesArray[j] >= 4) {
                     for (let k = 0; k < arrayLength; k++) {
@@ -57,47 +60,23 @@ class Rules {
                     }
                 }
             }
-            //add score to special row
-            if (playerNumber === 0) {
-                this.countFirstPlayerScore[1] += points;
-            } else if (playerNumber === 1) {
-                this.countSecondPlayerScore[1] += points;
-            }
+            this.addScoreToCell(playerNumber, points);
             return points;
-        } else if (i === 8) {
+        } else if (statIndex === 8) {
             for (let j = 0; j < arrayLength; j++) {
                 if (countedDicesArray[j] === 3) {
                     for (let k = 0; k < arrayLength; k++) {
                         if (countedDicesArray[k] === 2) {
                             points = 30;
-                            //add score to special row
-                            if (playerNumber === 0) {
-                                this.countFirstPlayerScore[1] += points;
-                            } else if (playerNumber === 1) {
-                                this.countSecondPlayerScore[1] += points;
-                            }
                             break;
-                        } else {
-                            //add score to special row
-                            if (playerNumber === 0) {
-                                this.countFirstPlayerScore[1] += points;
-                            } else if (playerNumber === 1) {
-                                this.countSecondPlayerScore[1] += points;
-                            }
                         }
                     }
                     break;
-                } else {
-                    //add score to special row
-                    if (playerNumber === 0) {
-                        this.countFirstPlayerScore[1] += points;
-                    } else if (playerNumber === 1) {
-                        this.countSecondPlayerScore[1] += points;
-                    }
                 }
             }
+            this.addScoreToCell(playerNumber, points);
             return points;
-        } else if (i === 9) {
+        } else if (statIndex === 9) {
             const scopeStart = [0, 1, 2, 0, 1];
             const scopeEnd = [3, 4, 5, 4, 5];
             let count = 0;
@@ -114,22 +93,11 @@ class Rules {
 
             if (count === 4 || count === 5) {
                 points = 35;
-                //add score to special row
-                if (playerNumber === 0) {
-                    this.countFirstPlayerScore[1] += points;
-                } else if (playerNumber === 1) {
-                    this.countSecondPlayerScore[1] += points;
-                }
-            } else {
-                // add score to special row
-                if (playerNumber === 0) {
-                    this.countFirstPlayerScore[1] += points;
-                } else if (playerNumber === 1) {
-                    this.countSecondPlayerScore[1] += points;
-                }
             }
+
+            this.addScoreToCell(playerNumber, points);
             return points;
-        } else if (i === 10) {
+        } else if (statIndex === 10) {
             const checkPossibilities = countedDicesArray.map(element => element === 1);
             let count = 0;
             for (let j = 0; j < checkPossibilities.length; j++) {
@@ -138,51 +106,23 @@ class Rules {
             }
             if (count === 5) {
                 points = 50;
-                //add score to special row
-                if (playerNumber === 0) {
-                    this.countFirstPlayerScore[1] += points;
-                } else if (playerNumber === 1) {
-                    this.countSecondPlayerScore[1] += points;
-                }
-            } else {
-                //add score to special row
-                if (playerNumber === 0) {
-                    this.countFirstPlayerScore[1] += points;
-                } else if (playerNumber === 1) {
-                    this.countSecondPlayerScore[1] += points;
-                }
             }
+
+            this.addScoreToCell(playerNumber, points);
             return points;
-        } else if (i === 11) {
+        } else if (statIndex === 11) {
             for (let j = 0; j < arrayLength; j++) {
                 if (countedDicesArray[j] === 5) {
                     points = 60;
-                    //add score to special row
-                    if (playerNumber === 0) {
-                        this.countFirstPlayerScore[1] += points;
-                    } else if (playerNumber === 1) {
-                        this.countSecondPlayerScore[1] += points;
-                    }
                     break;
-                } else {
-                    //add score to special row
-                    if (playerNumber === 0) {
-                        this.countFirstPlayerScore[1] += points;
-                    } else if (playerNumber === 1) {
-                        this.countSecondPlayerScore[1] += points;
-                    }
                 }
             }
+            this.addScoreToCell(playerNumber, points);
             return points;
-        } else if (i === 12) {
+        } else if (statIndex === 12) {
             let counter = 0;
             countedDicesArray.forEach((element, index) => counter += (element * (index + 1)));
-            //add score to special row
-            if (playerNumber === 0) {
-                this.countFirstPlayerScore[1] += counter;
-            } else if (playerNumber === 1) {
-                this.countSecondPlayerScore[1] += counter;
-            }
+            this.addScoreToCell(playerNumber, counter);
             return counter;
         }
     }
