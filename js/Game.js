@@ -1,10 +1,10 @@
 class Game {
     constructor() {
-        this.gameVariables();
+        this.initGameVariables();
         this.gameLogicInConstructor();
     }
 
-    gameVariables() {
+    initGameVariables() {
         //from html
         this.specialRows = document.querySelectorAll(".special_row");
         this.specialRows = document.querySelectorAll(".special_row");
