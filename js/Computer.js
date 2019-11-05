@@ -15,8 +15,7 @@ class Computer {
     chooseTheBestOption(countedDices, secondColumn, round) {
         this.computerCountDices = countedDices;
         const compCountDicesArray = Object.values(this.computerCountDices);
-        const arrayLength = compCountDicesArray.length;
-        const scores = this.fillScoresTable(compCountDicesArray, arrayLength, secondColumn);
+        const scores = this.fillScoresTable(compCountDicesArray, compCountDicesArray.length, secondColumn);
         this.chooseScore(scores, secondColumn);
         this.clearComputerCount(round)
     }
