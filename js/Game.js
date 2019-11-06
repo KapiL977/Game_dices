@@ -7,7 +7,6 @@ class Game {
     initGameVariables() {
         //from html
         this.specialRows = document.querySelectorAll(".special_row");
-        this.specialRows = document.querySelectorAll(".special_row");
         this.roundNumber = document.querySelector(".round_number");
         this.gamerName = document.querySelector(".gamer_name");
         this.numberOfThrows = document.querySelectorAll(".throw_number");
@@ -45,14 +44,14 @@ class Game {
     }
 
     gameLogicInConstructor() {
-        //disable click in second column cells
+        //disable click on second column cells
         this.secondColumn.forEach(cell => cell.style.pointerEvents = "none");
-        //click in cells
+        //click on cells
         for (let i = 0; i < this.firstColumn.length; i++) {
             this.firstColumn[i].addEventListener("click", this.afterClickInCell.bind(this, i));
             this.secondColumn[i].addEventListener("click", this.afterClickInCell.bind(this, i));
         }
-        //click in main buttons
+        //click on main buttons
         this.startGameBtn.addEventListener("click", this.startGame);
         this.throwDicesBtn.addEventListener("click", this.throwDices);
         this.rethrowDicesBtn.addEventListener("click", this.rethrowDices);
@@ -206,10 +205,10 @@ class Game {
         //reset and show who won
         if (!draw) {
             alert(`Wygrał gracz: ${winner} i uzyskał ${points} punktów. Gratulacje!`);
-            this.startPanel.style.display = "flex";
         } else {
             alert("W grze wystąpił remis! Gratulacje dla obydwu graczy!");
         }
+        this.startPanel.style.display = "flex";
         //clear round and statistics table
         this.round = 1;
         this.statisticsTable.clearTableAfterLastRound(this.firstColumn, this.secondColumn);
