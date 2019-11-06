@@ -1,4 +1,6 @@
-class StatisticsTable {
+import Rules from "./Rules.js";
+
+export default class StatisticsTable {
     constructor(specialRows) {
         this.rules = new Rules(specialRows);
         this.firstColumnCellsAfterClick = [];

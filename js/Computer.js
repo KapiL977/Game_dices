@@ -1,4 +1,7 @@
-class Computer {
+import Rules from "./Rules.js";
+import RandomNumberGenerator from "./RandomNumberGenerator.js";
+
+export default class Computer {
     constructor(specialRow) {
         this.randomNumberGenerator = new RandomNumberGenerator();
         this.rules = new Rules(specialRow);

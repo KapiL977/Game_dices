@@ -1,4 +1,4 @@
-class Rules {
+export default class Rules {
     constructor(specialRows) {
         this.specialRows = specialRows;
         this.countFirstPlayerScore = [0, 0];

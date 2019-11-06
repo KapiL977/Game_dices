@@ -1,4 +1,4 @@
-class RandomNumberGenerator {
+export default class RandomNumberGenerator {
     generateRandomNumbers(number) {
         const randomNumbers = [];
         for (let i = 0; i < number; i++) {

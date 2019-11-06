@@ -1,3 +1,8 @@
+import RandomNumberGenerator from "./RandomNumberGenerator.js";
+import Computer from "./Computer.js";
+import Player from "./Player.js";
+import StatisticsTable from "./StatisticsTable.js";
+
 class Game {
     constructor() {
         this.initGameVariables();
@@ -222,4 +227,4 @@ class Game {
     }
 }
 
-const game = new Game();
+new Game();

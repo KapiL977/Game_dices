@@ -1,4 +1,4 @@
-class Player {
+export default class Player {
     getNumberOfPlayers() {
         let numberOfPlayers = prompt("Podaj ilość zawodników (max 2, min 1)");
         while (numberOfPlayers <= 0 || numberOfPlayers > 2 || isNaN(numberOfPlayers)) {
