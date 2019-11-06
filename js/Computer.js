@@ -22,10 +22,12 @@ class Computer {
 
     fillScoresTable(compDicesArray, arrayLength, column) {
         const scores = [];
+        const upperPartLastIndex = 6;
+        const lowerPartLastIndex = 13;
         for (let i = 0; i < column.length; i++) {
-            if (i < 6) {
+            if (i < upperPartLastIndex) {
                 scores.push(this.rules.upperPartsCountScore(i, this.computerCountDices));
-            } else if (i >= 6 && i < 13) {
+            } else if (i >= upperPartLastIndex && i < lowerPartLastIndex) {
                 scores.push(this.rules.lowerPartsCountScore(i, arrayLength, compDicesArray, 0, 2));
             }
         }
