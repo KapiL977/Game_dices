@@ -9,24 +9,24 @@ class Rules {
         this._canAddRules = [true, true];
     }
 
-    upperPartOfStatsTable(countedDices, column, i, playerNumber) {
-        const scoreIntoTable = this.upperPartsCountScore(i, countedDices);
+    upperPartOfStatsTable(countedDice, column, i, playerNumber) {
+        const scoreIntoTable = this.upperPartsCountScore(i, countedDice);
         column[i].textContent = scoreIntoTable;
         this.upperPartSpecialRows(playerNumber, scoreIntoTable);
         this.showFinalResult(playerNumber);
         this.clearRules(playerNumber);
     }
 
-    upperPartsCountScore(statIndex, countedDices) {
-        let scoreIntoTable = (statIndex + 1) * countedDices[statIndex + 1];
+    upperPartsCountScore(statIndex, countedDice) {
+        let scoreIntoTable = (statIndex + 1) * countedDice[statIndex + 1];
         return scoreIntoTable;
     }
 
-    lowerPartOfStatsTable(countedDices, column, statIndex, playerNumber) {
+    lowerPartOfStatsTable(countedDice, column, statIndex, playerNumber) {
         let points = 0;
-        const countedDicesArray = Object.values(countedDices);
-        const arrayLength = countedDicesArray.length;
-        const score = this.lowerPartsCountScore(statIndex, arrayLength, countedDicesArray, points, playerNumber);
+        const countedDiceArray = Object.values(countedDice);
+        const arrayLength = countedDiceArray.length;
+        const score = this.lowerPartsCountScore(statIndex, arrayLength, countedDiceArray, points, playerNumber);
         column[statIndex].textContent = score;
         this.lowerPartSpecialRow(playerNumber);
         this.showFinalResult(playerNumber);
@@ -41,12 +41,12 @@ class Rules {
         }
     }
 
-    lowerPartsCountScore(statIndex, arrayLength, countedDicesArray, points, playerNumber) {
+    lowerPartsCountScore(statIndex, arrayLength, countedDiceArray, points, playerNumber) {
         if (statIndex === 6) {
             for (let j = 0; j < arrayLength; j++) {
-                if (countedDicesArray[j] >= 3) {
+                if (countedDiceArray[j] >= 3) {
                     for (let k = 0; k < arrayLength; k++) {
-                        points += (k + 1) * countedDicesArray[k];
+                        points += (k + 1) * countedDiceArray[k];
                     }
                 }
             }
@@ -54,9 +54,9 @@ class Rules {
             return points;
         } else if (statIndex === 7) {
             for (let j = 0; j < arrayLength; j++) {
-                if (countedDicesArray[j] >= 4) {
+                if (countedDiceArray[j] >= 4) {
                     for (let k = 0; k < arrayLength; k++) {
-                        points += (k + 1) * countedDicesArray[k];
+                        points += (k + 1) * countedDiceArray[k];
                     }
                 }
             }
@@ -64,9 +64,9 @@ class Rules {
             return points;
         } else if (statIndex === 8) {
             for (let j = 0; j < arrayLength; j++) {
-                if (countedDicesArray[j] === 3) {
+                if (countedDiceArray[j] === 3) {
                     for (let k = 0; k < arrayLength; k++) {
-                        if (countedDicesArray[k] === 2) {
+                        if (countedDiceArray[k] === 2) {
                             points = 30;
                             break;
                         }
@@ -80,7 +80,7 @@ class Rules {
             const scopeStart = [0, 1, 2, 0, 1];
             const scopeEnd = [3, 4, 5, 4, 5];
             let count = 0;
-            const checkPossibilities = countedDicesArray.map(element => (element >= 1 && element <= 2));
+            const checkPossibilities = countedDiceArray.map(element => (element >= 1 && element <= 2));
 
             for (let j = 0; j < scopeStart.length; j++) {
                 for (let k = scopeStart[j]; k <= scopeEnd[j]; k++) {
@@ -98,7 +98,7 @@ class Rules {
             this.addScoreToCell(playerNumber, points);
             return points;
         } else if (statIndex === 10) {
-            const checkPossibilities = countedDicesArray.map(element => element === 1);
+            const checkPossibilities = countedDiceArray.map(element => element === 1);
             let count = 0;
             for (let j = 0; j < checkPossibilities.length; j++) {
                 checkPossibilities[j] === true ? count++ : count = 0;
@@ -112,7 +112,7 @@ class Rules {
             return points;
         } else if (statIndex === 11) {
             for (let j = 0; j < arrayLength; j++) {
-                if (countedDicesArray[j] === 5) {
+                if (countedDiceArray[j] === 5) {
                     points = 60;
                     break;
                 }
@@ -121,7 +121,7 @@ class Rules {
             return points;
         } else if (statIndex === 12) {
             let counter = 0;
-            countedDicesArray.forEach((element, index) => counter += (element * (index + 1)));
+            countedDiceArray.forEach((element, index) => counter += (element * (index + 1)));
             this.addScoreToCell(playerNumber, counter);
             return counter;
         }

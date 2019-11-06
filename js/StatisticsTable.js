@@ -3,7 +3,7 @@ class StatisticsTable {
         this.rules = new Rules(specialRows);
         this.firstColumnCellsAfterClick = [];
         this.secondColumnCellsAfterClick = [];
-        this.countedDices = '';
+        this.countedDice = '';
         this.playersNamesRow = '';
     }
 
@@ -18,8 +18,8 @@ class StatisticsTable {
         }
     }
 
-    addScoreToTable(playerNumber, countedDices, i, firstColumn, secondColumn, playersNames) {
-        this.countedDices = countedDices;
+    addScoreToTable(playerNumber, countedDice, i, firstColumn, secondColumn, playersNames) {
+        this.countedDice = countedDice;
         if (playerNumber === 0) {
             this.addToRulesClass(i, firstColumn, playerNumber);
             if (playersNames[1] !== "Komputer") {
@@ -35,9 +35,9 @@ class StatisticsTable {
 
     addToRulesClass(i, column, playerNumber) {
         if (i <= 5) {
-            this.rules.upperPartOfStatsTable(this.countedDices, column, i, playerNumber);
+            this.rules.upperPartOfStatsTable(this.countedDice, column, i, playerNumber);
         } else {
-            this.rules.lowerPartOfStatsTable(this.countedDices, column, i, playerNumber);
+            this.rules.lowerPartOfStatsTable(this.countedDice, column, i, playerNumber);
         }
     }
 
@@ -54,7 +54,7 @@ class StatisticsTable {
         let playersCells = [...document.querySelectorAll("[data-name='player']")];
         this.firstColumnCellsAfterClick = [];
         this.secondColumnCellsAfterClick = [];
-        this.countedDices = '';
+        this.countedDice = '';
         for (let i = 0; i < firstColumn.length; i++) {
             firstColumn[i].style.pointerEvents = "auto";
             firstColumn[i].textContent = "";

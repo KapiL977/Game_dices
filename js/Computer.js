@@ -3,32 +3,32 @@ class Computer {
         this.randomNumberGenerator = new RandomNumberGenerator();
         this.rules = new Rules(specialRow);
         this.computerFiveNumbers = [];
-        this.computerCountDices = {};
+        this.computerCountDice = {};
         this.usedIndex = [];
     }
 
-    generateComputerDices() {
+    generateComputerDice() {
         this.computerFiveNumbers = this.randomNumberGenerator.generateRandomNumbers(5);
         return this.computerFiveNumbers;
     }
 
-    chooseTheBestOption(countedDices, secondColumn, round) {
-        this.computerCountDices = countedDices;
-        const compCountDicesArray = Object.values(this.computerCountDices);
-        const scores = this.fillScoresTable(compCountDicesArray, compCountDicesArray.length, secondColumn);
+    chooseTheBestOption(countedDice, secondColumn, round) {
+        this.computerCountDice = countedDice;
+        const compCountDiceArray = Object.values(this.computerCountDice);
+        const scores = this.fillScoresTable(compCountDiceArray, compCountDiceArray.length, secondColumn);
         this.chooseScore(scores, secondColumn);
         this.clearComputerCount(round)
     }
 
-    fillScoresTable(compDicesArray, arrayLength, column) {
+    fillScoresTable(compDiceArray, arrayLength, column) {
         const scores = [];
         const upperPartLastIndex = 6;
         const lowerPartLastIndex = 13;
         for (let i = 0; i < column.length; i++) {
             if (i < upperPartLastIndex) {
-                scores.push(this.rules.upperPartsCountScore(i, this.computerCountDices));
+                scores.push(this.rules.upperPartsCountScore(i, this.computerCountDice));
             } else if (i >= upperPartLastIndex && i < lowerPartLastIndex) {
-                scores.push(this.rules.lowerPartsCountScore(i, arrayLength, compDicesArray, 0, 2));
+                scores.push(this.rules.lowerPartsCountScore(i, arrayLength, compDiceArray, 0, 2));
             }
         }
         return scores;

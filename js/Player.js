@@ -20,19 +20,19 @@ class Player {
         return playersNames;
     }
 
-    getDicesToRethrow(dicesInArea) {
-        const dicesToRethrow = [];
-        dicesInArea.forEach((dice, diceIndex) => {
+    getDiceToRethrow(diceInArea) {
+        const diceToRethrow = [];
+        diceInArea.forEach((dice, diceIndex) => {
             dice.addEventListener("click", () => {
                 if (dice.classList.toggle("active")) {
-                    dicesToRethrow.push(diceIndex);
+                    diceToRethrow.push(diceIndex);
                 } else {
-                    dicesToRethrow.forEach((element, i) => {
-                        if (element === diceIndex) dicesToRethrow.splice(i, 1);
+                    diceToRethrow.forEach((element, i) => {
+                        if (element === diceIndex) diceToRethrow.splice(i, 1);
                     })
                 }
             })
         })
-        return dicesToRethrow;
+        return diceToRethrow;
     }
 }
