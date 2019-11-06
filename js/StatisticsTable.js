@@ -63,6 +63,6 @@ export default class StatisticsTable {
             secondColumn[i].textContent = "";
         }
         playersCells.forEach(el => el.remove());
-        this.rules.specialRows.forEach(cell => cell.textContent = "");
+        this.rules.specialRows.forEach(cell => cell.textContent = 0);
     }
 }
