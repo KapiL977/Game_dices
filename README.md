@@ -1,4 +1,4 @@
-### Dice!
+# Dice!
 
 Dice game which was my first own project in pure JavaScript.
 
@@ -10,17 +10,17 @@ If you want to know the rules, you can check "Zasady" window (**You have to clic
 
 Good luck and have fun! :)
 
-### Important!
+# Important!
 
 If you want to play that game, you must have a browser which support ES6! 
 
-### Technologies I used in project
+# Technologies I used in project
 
 - HTML5
 - CSS3
 - JavaScript 
 
-### Link
+# Link
 
 Use that link to play the game: [Dice](https://falwack.github.io/Game_dices/).
 
