@@ -25,6 +25,7 @@ class Game {
         this.startGameBtn = document.querySelector(".start_game");
         this.throwDiceBtn = document.querySelector(".throw");
         this.rethrowDiceBtn = document.querySelector(".rethrow");
+        this.wrapper = document.querySelector(".wrapper");
         //instance of a class
         this.player = new Player();
         this.statisticsTable = new StatisticsTable(this.specialRows);
@@ -66,6 +67,7 @@ class Game {
         const trulyStart = confirm("Czy na pewno chcesz rozpocząć grę?");
         if (trulyStart) {
             this.startPanel.style.display = "none";
+            this.wrapper.style.display = "grid";
             const numberOfPlayers = this.player.getNumberOfPlayers();
             this.playersNames = this.player.getPlayersNames(numberOfPlayers);
             if (numberOfPlayers === 2) {
@@ -214,6 +216,7 @@ class Game {
             alert("W grze wystąpił remis! Gratulacje dla obydwu graczy!");
         }
         this.startPanel.style.display = "flex";
+        this.wrapper.style.display = "none";
         //clear round and statistics table
         this.round = 1;
         this.statisticsTable.clearTableAfterLastRound(this.firstColumn, this.secondColumn);
