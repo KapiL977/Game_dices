@@ -14,10 +14,14 @@ export default class Player {
         for (let i = 0; i < numberOfPlayers; i++) {
             let playerName = prompt(`Podaj imię zawodnika ${i + 1} (ograniczenie znaków: max 8, min 1)`);
             while (playerName === null || (playerName.length < 1 || playerName.length > 8) || playerName.includes(" ") || playerName.toLowerCase() === "komputer") {
-                const isComputer = playerName.toLowerCase() === "komputer" ? true : false;
-                message = `Podane imię jest za krótkie lub za długie. Mogło również zawierać spacje, bądź nie być w ogóle wpisane! Podaj imię zawodnika ${i + 1} (ograniczenie znaków: max 8, min 1)`;
-                messageIfComputer = `Żaden z graczy nie może nazywać się 'komputer'!  Podaj imię zawodnika ${i + 1} (ograniczenie znaków: max 8, min 1)`
-                playerName = prompt(isComputer ? messageIfComputer : message);
+                if (playerName !== null) {
+                    const isComputer = playerName.toLowerCase() === "komputer" ? true : false;
+                    message = `Podane imię jest za krótkie lub za długie. Mogło również zawierać spacje! Podaj imię zawodnika ${i + 1} (ograniczenie znaków: max 8, min 1)`;
+                    messageIfComputer = `Żaden z graczy nie może nazywać się 'komputer'!  Podaj imię zawodnika ${i + 1} (ograniczenie znaków: max 8, min 1)`
+                    playerName = prompt(isComputer ? messageIfComputer : message);
+                } else {
+                    playerName = prompt(`Imie nie może być puste! Podaj imię zawodnika ${i + 1} (ograniczenie znaków: max 8, min 1) `);
+                }
 
             }
             playersNames.push(playerName);

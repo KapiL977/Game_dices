@@ -50,14 +50,14 @@ class Game {
     }
 
     gameLogicInConstructor() {
-        //disable click on second column cells
+        //disable click at second column cells
         this.secondColumn.forEach(cell => cell.style.pointerEvents = "none");
-        //click on cells
+        //click at cells
         for (let i = 0; i < this.firstColumn.length; i++) {
             this.firstColumn[i].addEventListener("click", this.afterClickInCell.bind(this, i));
             this.secondColumn[i].addEventListener("click", this.afterClickInCell.bind(this, i));
         }
-        //click on main buttons
+        //click at main buttons
         this.startGameBtn.addEventListener("click", this.startGame);
         this.throwDiceBtn.addEventListener("click", this.throwDice);
         this.rethrowDiceBtn.addEventListener("click", this.rethrowDice);
@@ -66,10 +66,9 @@ class Game {
     startGame = () => {
         const trulyStart = confirm("Czy na pewno chcesz rozpocząć grę?");
         if (trulyStart) {
-            this.startPanel.style.display = "none";
-            this.wrapper.style.display = "grid";
             const numberOfPlayers = this.player.getNumberOfPlayers();
             this.playersNames = this.player.getPlayersNames(numberOfPlayers);
+            console.log(this.playersNames)
             if (numberOfPlayers === 2) {
                 while (this.playersNames[0] === this.playersNames[1] || this.playersNames[1] === "Komputer") {
                     alert("Musiałeś podać dwa razy taką samą nazwę zawodnika! Nazwy zawodników nie mogą się powtarzać. Podaj je jeszcze raz.");
@@ -80,6 +79,8 @@ class Game {
             this.statisticsTable.createTableSkeleton(this.playersNames, playersNamesRow);
             this.roundNumber.textContent = this.round;
             this.gamerName.textContent = this.playersNames[this.playerNumber];
+            this.startPanel.style.display = "none";
+            this.wrapper.style.display = "grid";
         }
     }
 
